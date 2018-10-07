@@ -1,0 +1,175 @@
+:: StorySettings
+ifid:3350760a-8be2-4892-86d3-1971cacab00f
+
+::StoryTitle [nobr]
+Cyclic Tunnel Experience
+
+::StorySubtitle [nobr]
+aka Groundhog Day
+
+/* ************************************************************************** */
+/* STORY CAPTION
+/* ************************************************************************** */
+
+::StoryCaption [nobr]
+
+<table class="sidebar">
+	<tr><th colspan="2">Game</th></tr>
+	<tr><td ≤colspan="2">
+			<!-- <<if $TimeOfDay == 0>>It's night<<endif>>
+			<<if $TimeOfDay == 1>>It's early morning<<endif>>
+			<<if $TimeOfDay == 2>>It's afternoon<<endif>>
+			<<if $TimeOfDay == 3>>It's evening<<endif>>
+			<<if $TimeOfDay == 4>>It's night<<endif>> -->
+			<!--on-->Day $scratch.GameDay
+		</td></tr>
+</table>
+<table class="sidebar">
+	<tr><th colspan="2">$npc.player.stat.name Stats</th></tr>
+	<tr><td>Communication:</td><td><<statDesc $npc.player.stat.communication>></td></tr>
+	<tr><td>Stamina:</td><td><<statDesc $npc.player.stat.stamina>></td></tr>
+	<tr><td>Concentration:</td><td><<statDesc $npc.player.stat.concentration>></td></tr>
+	<tr><td>Horniness:</td><td>$npc.player.stat.horniness</td></tr>
+	<tr><td>Achievements:</td><td><<achievement-completed-count>></td></tr>
+	<tr><td>Score:</td><td><<achievement-completed-score>></td></tr>
+</table>
+<table class="sidebar">
+	<tr><th colspan="2">$npc.riley.name Stats</th></tr>
+	<tr><td>Anger:</td><td>$npc.riley.stat.anger</td></tr>
+	<tr><td>Openness:</td><td>$npc.riley.stat.attraction</td></tr>
+	<tr><td>Horniness:</td><td>$npc.riley.stat.horniness</td></tr>
+	<tr><td>Headache:</td><td>$npc.riley.stat.headache</td></tr>
+</table>
+<table class="sidebar">
+	<tr><th colspan="2">Office Mates Friendship</th></tr>
+	<tr><td>Stella:</td><td><<friendliness $npc.stella.stat.attraction>></td></tr>
+	<tr><td>Jenny:</td><td><<friendliness $npc.jenny.stat.attraction>></td></tr>
+	<tr><td>Sarah:</td><td><<friendliness $npc.sarah.stat.attraction>></td></tr>
+</table>
+<<if $hypnoBookRead>>
+	<table class="sidebar">
+	<tr><th colspan="2">Flora of Antila</th></tr>
+	<tr><td>[[Read the Book|Book]]</td></tr>
+	</table>
+<</if>>
+<table class="sidebar">
+	<tr><th>Game</th></tr>
+	<tr><td>[[Game Info]]</td></tr>
+	<tr><td>[[Change Log]]</td></tr>
+	<tr><td>[[Achievements]]</td></tr>
+	<tr><td>[[Credits]]</td></tr>
+</table>
+<div style="border:1px solid #444;">Volume<<volume>></div>
+
+/* ::StoryShare */
+
+/* ************************************************************************** */
+/* STORY INIT
+/* ************************************************************************** */
+
+::StoryInit
+
+<<cacheaudio "click" "sound/click.mp3">>
+<<cacheaudio "doorbell" "sound/doorbell.mp3">>
+<<cacheaudio "ach" "sound/ach.mp3">>
+<<waitforaudio>>
+
+<<include widgets>>
+
+<<script>>
+	if (location.port === '8008') {
+		State.variables.debug = true;
+	}
+	if(State.variables.scratch === undefined) {
+		State.variables.scratch = {}
+		State.variables.scratch.GameDay = 1;
+		State.variables.scratch.InstallVisMe = false; /*true: read first email*/
+		State.variables.scratch.nightLife = false;
+		State.variables.scratch.downtownPlaces = [{label:"Gym",target:'scene-downtown-gym'}, {label:"Bar", target:'scene-downtown-bar'}, {label:"Library", target:'scene-downtown-library'}].shuffle();
+		State.variables.scratch.downtownLocations = [];
+		State.variables.scratch.hypnoBookRead = false;
+		State.variables.scratch.hypnoBookBought = false;
+		State.variables.scratch.hypnoContent = false;
+		State.variables.emailAvailable = ['riley.hi'];
+	}
+
+	window.log.getLogger("npc").setLevel('info');
+	window.log.getLogger("npc-chat").setLevel('info');
+
+
+	/*  [[Return|$return]] */
+	/*predisplay["Menu Return"] = function (taskName) {
+		if (! tags().contains("noreturn")) {
+			State.variables.return = passage();
+		}
+	};*/
+<</script>>
+
+/* ************************************************************************** */
+/* PASSAGE READY
+/* ************************************************************************** */
+
+::PassageReady
+
+/* ************************************************************************** */
+/* PASSAGE DONE
+/* ************************************************************************** */
+
+::PassageDone
+<<script>>
+$('.passage a').bind('click', function() {
+	$.wiki('<<audio click volume 0.25 play>>');
+});
+
+$('#debug > ul.toggle > li').bind('click', function() {
+	/* (this).find('li').css('display', 'block'); */
+	/* ul.toggle > li > ul */
+	$((this)).toggle('display', 'block');
+});
+<</script>>
+
+/* ************************************************************************** */
+/* PASSAGE HEADER
+/* ************************************************************************** */
+
+::PassageHeader [nobr]
+<<if tags().contains('scene')>>
+ 	<<scene-header>>
+<</if>>
+
+/* ************************************************************************** */
+/* PASSAGE FOOTER
+/* ************************************************************************** */
+
+::PassageFooter
+<<if tags().contains('sms')>>
+	<<sms-indicator>>
+<</if>>
+
+<<include debug>>
+
+::SugarCube configuration [script]
+
+Config.passages.start = "Start";
+Config.passages.nobr = true;
+Config.history.controls = true;
+Config.history.maxStates=20
+Config.debug = false;//State.variables.debug === undefined ? false : State.variables.debug;
+
+
+/* ************************************************************************** */
+/* START
+/* ************************************************************************** */
+
+::Start [nobr]
+<h1><<=Story.title>> - 0.0.1</h1>
+<i><<=Story.title>></i> is a ... framework.
+<p/>
+Make sure to check the audio volume in the left sidebar!
+<p/>
+This game contains adult imagery and themes, and should not be played by anyone under the age of 18.
+<p/>
+[[I am 18 or older, start the game.|intro]]
+
+::intro
+You know the drill ... [[follow the white rabbit.|scene-home-bed-morning]]

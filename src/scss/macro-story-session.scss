@@ -1,0 +1,26 @@
+
+.conv-player {
+	color:lightblue;
+}
+
+.conv-other {
+	color:pink;
+}
+
+.conv-default {
+	color:white;
+}
+
+.header.topleft {
+	width:100%;
+	img {
+		width:30%;
+		float:left;
+		margin-right:20px;
+		margin-bottom:20px;
+	}
+	.desc {
+		text-align: left;
+		font-style:normal;
+	}
+}

@@ -1,0 +1,272 @@
+/* ************************************************************************** */
+/* Story 0
+/* ************************************************************************** */
+
+::story-jenny-0
+<<story-session-header 'pic/npc/jenny/happy.jpg' '' '' true>>
+other		Hi $npc.player.name. I was wondering if, erm, maybe we could swap numbers so we coul		perhaps chat outside of work hours too?
+player		Sounds good to me Jenny!
+default 	Jenny can now message you when she feels like it.
+
+<<set $npc.jenny.stat.story = 1>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 1
+/* ************************************************************************** */
+
+::story-jenny-1
+
+<<story-session-header 'pic/npc/jenny/happy.jpg' '' ''>>
+other		Hello again $npc.player.name. I have to say, having you around has spiced up the office bit. When it was all girls we tended to wind each other up, get all bitchy and that. You've managed to distract us all from that so thank you.
+player		Well that's good to hear. I'll take it as a compliment.
+other		You do that
+default 	Jenny gives you a wink as you leave.
+
+//<<set $SMS.push(["Jenny", "Hi $npc.player.name, thanks for coming to chat today. You're such a lovely man. Realised I never gave you a pic for your phone. Hope this will do... ;)", "1", "office/jenny/phone01.jpg"])>>
+
+<<set $npc.jenny.stat.story = 2>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 2
+/* ************************************************************************** */
+
+::story-jenny-2
+
+<<story-session-header 'pic/npc/jenny/happy.jpg' '' ''>>
+other		Hey again $npc.player.name. Erm, can I ask you something?
+
+<<linkreplace "Of course you can Jenny.">>
+player		Of course you can Jenny.
+other		Well, I've actually been having some problems with my coding lately. It's just not the same as when I was at university. I just can't make the jump from that to these systems we use here.
+
+	<<linkreplace "I know what you mean.">>
+		player		I know what you mean. This real world stuff is a right pain in the ass! Maybe I could help you out from time to time. A bit of coaching, if you think that would help?
+		other		Oh yes! Could you? That would be great!
+		player		Sure thing. I'll see when I can pop by and help you out.
+
+		<<set $npc.jenny.stat.story = 3>>
+
+		<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 3
+/* ************************************************************************** */
+
+::story-jenny-3
+
+<<story-session-header 'pic/npc/jenny/bored.jpg' '' ''>>
+
+<div id="npc-story">
+
+	<<link "Hey Jenny. Is everything ok? You look a little down.">>
+		<<replace "#npc-story">>
+			<<story-session jenny 3.1>>
+		<</replace>>
+	<</link>>
+	<p/>
+	<<link "Well if you are sure...">>
+		<<replace "#npc-story">>
+			<<story-session jenny 3.2>>
+		<</replace>>
+	<</link>>
+
+</div>
+
+::story-jenny-3.1
+
+<<story-session-header 'pic/npc/jenny/chatstory.jpg' '' 'topleft'>>
+player		Hey Jenny. Is everything ok? You look a little down.
+other		Oh hey $npc.player.name. Oh it's nothing. . .
+
+<<linkreplace "Come on, you can tell me, we're pretty good friends now aren't we?">>
+player		Come on, you can tell me, we're pretty good friends now aren't we?
+other		Yeah. I suppose we are now really aren't we?
+other 		I was just thinking back to when I was a kid.<br/>I always wanted a horse, but we never had the money for that kind of thing. I had so many my little ponys, and magazines and I even found an old riding hat in a charity shop that I bought. But I never did get a horse.<br/>It's silly I know but it still feels like a dream I never achieved.<br/>
+
+	<<linkreplace "Maybe it's not too late?">>
+	player		Maybe it's not too late?
+	other 		What do you mean?
+
+		<<linkreplace "Well. You earn good money now, and there are plenty of places where you can pay to 'share' a horse.">>
+		other 		$npc.player.name! You are a genius! Why didn't I think of that. Thank you! I'm going to look in to that tonight for sure!
+		default 	Jenny jumps up and gives you a hug.
+		player		No problem Jenny. Glad I could help.
+
+		<<set $npc.jenny.stat.story = 4>>
+		<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+::story-jenny-3.2
+
+player		Well if you are sure. . .
+other		Well, actually, I suppose it wouldn't hurt. . .
+other 		I was just thinking back to when I was a kid.<br/>I always wanted a horse, but we never had the money for that kind of thing. I had so many my little ponys, and magazines and I even found an old riding hat in a charity shop that I bought. But I never did get a horse.<br/>It's silly I know but it still feels like a dream I never achieved.<br/>
+
+<<linkreplace "Maybe it's not too late?">>
+player		Maybe it's not too late?
+other 		What do you mean?
+
+	<<linkreplace "Well. You earn good money now, and there are plenty of places where you can pay to 'share' a horse.">>
+	other 		$npc.player.name! You are a genius! Why didn't I think of that. Thank you! I'm going to look in to that tonight for sure!
+	default 	Jenny jumps up and gives you a hug.
+	player		No problem Jenny. Glad I could help.
+
+	<<set $npc.jenny.stat.story = 4>>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+	<</linkreplace>>
+<</linkreplace>>
+
+
+/* ************************************************************************** */
+/* Story 6
+/* ************************************************************************** */
+
+::story-jenny-6
+
+<<story-session-header 'pic/npc/jenny/happy.jpg' '' ''>>
+
+<<linkreplace "Enter Jenny's Office">>
+<<story-session-header 'pic/npc/jenny/chatstory.jpg' '' 'topleft'>>
+
+default		As you enter Jenny is on the phone to someone, but waves you over anyway.
+other		I know, I know, things will be OK. You'll find the real deal soon I'm sure. You take though OK? OK, bye.
+player		Everything OK?
+other		Oh that was just my friend Sunny. She's having a few problems getting her modelling career off the ground.
+player		Modelling?
+other		Yeah, she's always wanted to be a model. She tried to get into fashion for a while but they said her tits were too big. I mean they're decent but not what I think you would think 'too' big! So she's been trying glamour, but that's not been going so well either..
+player		Glamour you say?
+other		Yeah I know, but it's what she wants. The problem is all the photographers she seems to meet are all fraudsters who just try it on with her once she starts undressing. It's such a shame because I think she would be really good at it.
+player		Do you know. I might be able to help.
+other		What? How?
+player		Well I have a friend myself who has just gotten started in the business, and she'd looking for some new talent.
+other		She?
+player		Yeah, my fiend $npc.jenny.name. So at the very least that should avoid the problem of a lecherous photographer!
+other		Oh wow, that might just be the break she needs! Can I pass of her details?
+player		Of course.
+default 	You give $npc.jenny.name's details and she texts them over to her friend.
+other		Thanks $npc.player.name! You are so full of surprises!
+player		I try.
+
+<<set $npc.jenny.stat.story = 7>>
+<<set $npc.riley.stat.story = 8>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 8
+/* ************************************************************************** */
+
+::story-jenny-8
+<div id="npc-story-outer">
+	<<story-session-header 'pic/npc/jenny/happy.jpg' '' ''>>
+	<<linkreplace "Enter Jenny's Office">>
+		<<story-session-header 'pic/npc/jenny/chatstory.jpg' '' 'topleft'>>
+		other		$npc.player.name! Come here. Sunny just sent over some shots from her photoshoot with your friend. They are amazing!
+		<<link "Indeed she is">>
+			<<replace "#npc-story-outer">>
+				<<story-session jenny 8.1>>
+			<</replace>>
+		<</link>>
+	<</linkreplace>>
+</div>
+
+::story-jenny-8.1
+	<<visme-session-header 'pic/npc/jenny/photoshoot01.jpg' ''>>
+	<div id="npc-story">
+		other		She's so elegant.
+		<<link "Indeed she is">>
+			<<replace "#npc-story">>
+				<<story-session jenny 8.2>>
+			<</replace>>
+		<</link>>
+	</div>
+
+::story-jenny-8.2
+	<<visme-session-header 'pic/npc/jenny/photoshoot02.jpg' ''>>
+	other		Damn girl!
+	<<link "She certainly has her look down">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.3>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.3
+	<<visme-session-header 'pic/npc/jenny/photoshoot03.jpg' ''>>
+	other		Spankable, wouldn't you say?
+	<<link "It would be hard to resist">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.4>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.4
+	<<visme-session-header 'pic/npc/jenny/photoshoot04.jpg' ''>>
+	other		Kinda wish I had her tits...
+	<<link "Nothing wrong with your tits Jenny">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.5>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.5
+	<<visme-session-header 'pic/npc/jenny/photoshoot05.jpg' ''>>
+	other		Aww, thanks.
+
+	<<link "Looks like she is enjoying herself">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.6>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.6
+	<<visme-session-header 'pic/npc/jenny/photoshoot06.jpg' ''>>
+	other		LOL, I've seen that look on her face before! And it looks like she's forgotten her panties. Typical Sunny.
+	<<link "Never a bad idea">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.7>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.7
+	<<visme-session-header 'pic/npc/jenny/photoshoot07.jpg' ''>>
+	other		It does seem to have given her easy access...
+	<<link "Is it me or is it getting warm in here.">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.8>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.8
+	<<visme-session-header 'pic/npc/jenny/photoshoot08.jpg' ''>>
+	other		Certainly looks like you pants are getting tighter!
+	<<link "Can you blame me?">>
+		<<replace "#npc-story">>
+			<<story-session jenny 8.9>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.9
+	<<visme-session-header 'pic/npc/jenny/photoshoot09.jpg' ''>>
+	other		Actually no. Sunny is working her magic on me too.
+	<<link "Good job your monitor faces this way.">>
+		<<replace "#npc-story">>
+			<<story-session jenny '8.10'>>
+		<</replace>>
+	<</link>>
+
+::story-jenny-8.10
+	<<visme-session-header 'pic/npc/jenny/photoshoot10.jpg' ''>>
+	other		Haha, true. Still best end it there. Don't want to get into trouble with Sarah.
+	player		Good point. But thanks for sharing.
+	other		Thank you for helping Sunny out. She's been so happy.
+	player		Anytime Jenny. Talk to you later.
+	<<set $npc.jenny.stat.story = 9>>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>

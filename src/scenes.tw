@@ -1,0 +1,511 @@
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Bedroom -->
+::scene-home-bed-morning [sms scene]
+
+<<achievement-completed>>
+
+<p class="scene-nav">
+	<<set _tmp = 'Check your Computer ('+variables().emailAvailable.length+' New Mail)'>>
+	<<link _tmp scene-home-computer>>
+		<<set $scratch.tmp_computer_return_passageid to 'scene-home-bed-morning'>>
+	<</link>>
+</p>
+
+<<if $npc.player.stat.horniness > 50>>
+	<p class="scene-nav interact theporntrigger">
+		<<linkreplace "Masturbate">>
+			<<set _randomPorn = $porn.random(0, $porn.length - 1)>>
+			<<story-session-header _randomPorn[0] 'You spend a good while fapping away to some internet porn.' _randomPorn[1]>>
+			<<stat player.horniness -60>>
+			<<stat player.communication -1>>
+			<<remove .theporntrigger>>
+		<</linkreplace>>
+	</p>
+<</if>>
+
+<<if $scratch.packageDeliverd and $scratch.packageUnopened>>
+	<p class="scene-nav">
+		[[Open the Package|Package]]
+	</p>
+<</if>>
+
+<<if not $scratch.hypnoBookRead and $scratch.hypnoBookBought and $scratch.hypnoContent>>
+	<p class="scene-nav">
+		[[Read the Book on Flowers|scene-flowerbook]]
+	</p>
+<</if>>
+
+<p class="scene-nav">
+	[[Wash, dress and go to Work|scene-work-morning]]
+</p>
+
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Computer -->
+::scene-home-computer [sms scene]
+
+<<email-indicator>>
+
+<<if $scratch.InstallVisMe === true>>
+	<<linkreplace "Install VisMe">>
+		Install VisMe
+		<br/>After a quick search online to find the home page fro VisMe, and within a few minutes you have the client downloaded and installed. No warning from your anti-virus, so it's probably fine. Probably.
+		<br/>You send a friend request through to 'CheekyGirl91'.
+		<br/><p class="scene-nav interact">[[Load VisMe|scene-computer-visme]]</p>
+		<<scratch VisMe = 1>>
+		<<scratch InstallVisMe = false>>
+		<<scratch Session = 0>>
+	<</linkreplace>>
+<<endif>>
+
+<<if $npc.riley.stat.worktrip is true >>
+	$npc.riley.name is away on her buisness trip at the moment, so no point loading up VizMe today.
+<<elseif $scratch.VisMe == 1 && $scratch.Session == 1 && $npc.riley.stat.worktrip is false>>
+	You've already chatted with $npc.riley.name today.
+<<elseif $scratch.VisMe == 1 && $scratch.Session == 0 && $npc.riley.stat.worktrip is false>>
+	<p class="scene-nav">
+		[[Load VisMe|scene-computer-visme]]
+	</p>
+<<endif>>
+
+<p class="scene-nav">
+	[[Shutdown the PC|$scratch.tmp_computer_return_passageid]]
+</p>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Read Mail -->
+::scene-computer-email
+
+<<email-display>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- VisMe -->
+::scene-computer-visme
+
+<div class="computer-screen">
+	<div class="computer-header">VisMe</div>
+	<div class="computer-wallpaper">
+		<img src="pic/computer/wallpaper01.jpg">
+		<div class="computer-content">
+			<<if (lastVisited('scene-home-bed-morning') < lastVisited('scene-home-bed-evening')) || lastVisited('scene-home-bed-evening') === -1>>
+				CheekyGirl91 <span style="color: red">OFFLINE</span>
+			<<elseif $npc.riley.stat.headache < 20>>
+					<<link 'CheekyGirl91 - ONLINE' scene-computer-visme-session>><</link>>
+			<<elseif $npc.riley.stat.headache < 40>>
+				<<link "CheekyGirl91 ONLINE">>
+					<<replace ".desc">>
+						Odd, you get no response from $npc.riley.name
+					<</replace>>
+					<<sms-add riley.unassorted.headacheSmall>>
+					<!-- OK-ADDED <<set $SMS.push(["$npc.riley.name", "Hi $npc.player.stat.name, Sorry I didn't answer you last night. Had a bit of a headache. Hopefully it will have cleard by tonight."])>> -->
+				<</link>>
+			<<elseif $npc.riley.stat.headache >= 40>>
+				<<link "CheekyGirl91 ONLINE">>
+					<<replace ".desc">>
+						Odd, you get no responce from $npc.riley.name
+					<</replace>>
+					<!-- OK-ADDED <<set $SMS.push(["$npc.riley.name", "Hi $npc.player.stat.name, Sorry I didn't get to the computer last night. Have an absolute killer of a headache at the moment. Could be a few days before this one passes. Sorry Hun. x x x"])>> -->
+					<<sms-add riley.unassorted.headacheBig>>
+				<</link>>
+			<</if>>
+		</div>
+	</div>
+</div>
+
+<p class="desc">&nbsp;</p>
+
+<p class="scene-nav">
+	[[Log off|scene-home-computer]]
+</p>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Session -->
+::scene-computer-visme-session
+
+<<visme-session riley>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Session -->
+::scene-computer-visme-session-reaction
+
+<<visme-session-reaction $scratch.tmp_npcid $scratch.tmp_stateid>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Work -->
+::scene-work-morning [sms scene]
+
+<p class="scene-nav">
+	[[Work through your Morning Chores|scene-work-morning-lunch-before]]
+</p>
+
+<<set $scratch.tmp_npc_chat_npcid_chat_exit_passageid to 'scene-work-morning-lunch-before'>>
+<<include npc-chat-available>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Morning Chores -->
+::scene-work-morning-lunch-before [sms scene]
+
+<<set _tmp = random(1,100)>>
+<<set _tmp += Math.round($npc.player.stat.horniness/5)>>
+<<set $npc.stella.stat.chance += _tmp>>
+
+<<if $npc.stella.stat.chance < 80 || $scratch.GameDay == 1>>
+	<<story-session-header pic/location/officeComputer.jpg "You have an uneventful morning and get a good deal of work done.">>
+	<<stat player.concentration 1>>
+<<else>>
+	<<set $npc.stella.stat.chance = 0>>
+	<<set _max = $encounter.stella.length - 1>>
+	<<set _cap = Math.max(_max, Math.floor($npc.stella.stat.attraction/10))>>
+	<<set _rnd = random(0,_cap)>>
+	<<set _arr = $encounter.stella[_rnd]>>
+
+	<<story-session-header _arr[0] _arr[1] 'topleft'>>
+
+	<<set _hrn = _rnd + 1>>
+	<<stat player.horniness _hrn>>
+	<<stat stella.attraction 1>>
+	<<set $npc.stella.stat.seen = true>>
+	<<achievement-unlock steller>>
+<<endif>>
+
+<<include achievement-office-check>>
+
+<p class="scene-nav">
+	[[You break for Lunch|scene-work-lunch-room]]
+</p>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Lunch -->
+::scene-work-lunch-room [sms scene]
+
+<p class="scene-nav">
+	[[Afterwards you can head back to the Office|scene-work-entering-office]]
+</p>
+<<if $scratch.GameDay > 4>>
+	<p class="scene-nav">
+		[[Or visit the Flower Shop first|scene-work-lunch-flowershop-interact]]
+	</p>
+<</if>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-work-lunch-flowershop-intro [scene]
+
+Heading back to the office you notice a Flower Shop has opened up just around the corner. Might be a place to visit.
+
+[Enter] the office.
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-work-lunch-flowershop-interact [scene]
+
+Flowers for sale:
+
+<p class="scene-nav interact">
+	<<link "Yellow Daffodil" scene-work-entering-office>>
+	<</link>>
+</p>
+
+<p class="scene-nav interact">
+	<<link "Purple Daffodil" scene-work-entering-office>>
+	<</link>>
+</p>
+
+You notice there are a few books in the shop too, most to do with plant care. One however stands out. The title is The Mesmerizing Flora of Antila:
+
+<p class="scene-nav interact">
+	<<link "Buy" scene-work-entering-office>>
+	<</link>>
+</p>
+<p class="scene-nav interact">
+	<<link "Ignore" scene-work-entering-office>>
+	<</link>>
+</p>
+<p class="scene-nav">
+	<<link "Afterwards you can head back to the Office" scene-work-entering-office>>
+	<</link>>
+</p>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Lunch Event -->
+::scene-work-entering-office [sms scene]
+
+<<if $scratch.GameDay == 4>>
+	<<story-session-header pic/location/flowershop.jpg "Heading back to the office you notice a Flower Shop has opened up just around the corner. Might be a place to visit.">>
+<<else>>
+	<<set _LunchEvent = random(1,100)>>
+	<<set _LunchEvent += Math.round($npc.player.stat.horniness/5)>>
+	<<if _LunchEvent >= 90>>
+		<<set _tmp to $downtown.lunch.random()>>
+		<<story-session-header _tmp[0] _tmp[1] _tmp[2]>>
+		<<stat player.horniness 5>>
+	<<endif>>
+<<endif>>
+
+<<if $npc.riley.stat.story == 5.5>>
+	<!-- <<set $SMS.push(["Time for action!", "pic/npc/riley/photo01.jpg","Good luck!"])>> -->
+	<<set $npc.riley.stat.story = 6>>
+<<else>>
+	<!-- <<girlrandomSMS>> -->
+<</if>>
+
+<<if $scratch.GameDay != 5>>
+	<p class="scene-nav">[[Enter the Office|scene-work-afternoon]]</p>
+<<else>>
+	<p class="scene-nav">
+		[[Enter the Office|scene-story][$scratch.tmp_story_npcid = 'sarah']]
+	</p>
+<<endif>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Afternoon -->
+::scene-work-afternoon [sms scene]
+
+<p class="scene-nav">
+	<<link "Work through your Afternoon Chores" scene-work-evening>>
+	<</link>>
+</p>
+
+<<set $scratch.tmp_npc_chat_npcid_chat_exit_passageid to 'scene-work-evening'>>
+<<include npc-chat-available>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+<!-- Afternoon Chores -->
+::scene-work-evening [sms scene]
+
+<<set _tmp = random(1,100)>>
+<<set _tmp += Math.round($npc.player.stat.horniness/5)>>
+<<set $npc.jenny.stat.chance += _tmp>>
+
+<<if $npc.jenny.stat.chance < 80 or $scratch.GameDay == 1>>
+	<<story-session-header pic/location/officeComputer.jpg "You have an uneventful morning and get a good deal of work done.">>
+	<<stat player.concentration 1>>
+<<else>>
+	<<set $npc.jenny.stat.chance = 0>>
+	<<set _max = $encounter.jenny.length - 1>>
+	<<set _cap = Math.max(_max, Math.floor($npc.jenny.stat.attraction/10))>>
+	<<set _rnd = random(0,_cap)>>
+	<<set _arr = $encounter.jenny[_rnd]>>
+
+	<<story-session-header _arr[0] _arr[1] 'topleft'>>
+
+	<<set _hrn = _rnd + 1>>
+	<<stat player.horniness _hrn>>
+	<<stat jenny.attraction 1>>
+	<<set $npc.jenny.stat.seen = true>>
+	<<achievement-unlock spinning>><!-- 3 -->
+<<endif>>
+
+<<include achievement-office-check>>
+
+<<if $npc.riley.stat.worktrip is true and $scratch.nightLife is false>>
+	<p class="scene-nav">[[You recall that $npc.riley.name is away at the moment, so with not much to do at home you head Downtown|scene-downtown][$scratch.nightLife to true;]]</p>
+<<else>>
+	<p class="scene-nav">[[After the day's events you shut down your workstation and head Home|scene-home-bed-evening]]</p>
+<<endif>>
+<<if $scratch.nightLife is true>>
+	<p class="scene-nav">[[Spend the evening Downtown|scene-downtown]]</p>
+<<endif>>
+
+/* ************************************************************************** */
+/* Downtown
+/* ************************************************************************** */
+
+::scene-downtown [scene]
+
+<!-- <<officeGirlSMS>> -->
+
+<div id="choices">
+
+	<p class="scene-nav interact">
+		<<link "Hang around checking out the sights">>
+			<<set _randomEncounter = random(1, 1000)>>
+			<<if _randomEncounter < 500>>
+				<<story-session-header pic/location/downtown.jpg "You spend some time hanging out, but don't see anything of much interest.">>
+				<<set $npc.player.stat.staminaLeft -= 5>>
+			<<else>>
+				<<set _downtownFun to $downtown.sights.random()>>
+				<<story-session-header _downtownFun[0] _downtownFun[1] _downtownFun[2]>>
+				<<set $npc.player.stat.horniness += 5>>
+				<<set $npc.player.stat.staminaLeft -= 5>>
+			<<endif>>
+			<<if $npc.player.stat.staminaLeft < 5>>
+				<<replace "#choices">>You're pretty worn out.<</replace>>
+			<<endif>>
+		<</link>>
+	</p>
+
+	<<if $scratch.downtownPlaces.length > 0>>
+		<p class="scene-nav interact">
+			<<link "Go looking for places of interest">>
+				<<set _randomEncounter = random(1, 1000)>>
+				<<if _randomEncounter >= 250>>
+					<<set _placeFound = $scratch.downtownPlaces[0]>>
+					<<set $scratch.downtownLocations.push(_placeFound)>>
+					<<set $scratch.downtownPlaces.splice(0, 1)>>
+					<<set $npc.player.stat.staminaLeft -= 5>>
+					<<goto _placeFound>>
+				<<else>>
+					<<story-session-header pic/location/downtown.jpg "You spend some time walking around the square, but don't see anything to interest you.">>
+					<<set $npc.player.stat.staminaLeft -= 5>>
+				<<endif>>
+				<<if $npc.player.stat.staminaLeft < 5>>
+					<<replace "#choices">>You're pretty worn out.<</replace>>
+				<<endif>>
+			<</link>>
+		</p>
+	<<endif>>
+
+	<<for _x=0;_x < $scratch.downtownLocations.length; _x++>>
+		Visit the [[$scratch.downtownLocations[_x]]]
+	<</for>>
+
+</div>
+
+Head [[home|scene-home-bed-evening]]
+
+/* ************************************************************************** */
+/* Downtown: Bar
+/* ************************************************************************** */
+
+<!-- TODO: early return -->
+::scene-downtown-bar [scene]
+
+<<downtown-interest bar>>
+
+/* ************************************************************************** */
+/* Downtown: Gym
+/* ************************************************************************** */
+
+<!-- TODO: early return -->
+::scene-downtown-gym [scene]
+
+<<downtown-interest gym>>
+
+/* ************************************************************************** */
+/* Downtown: Library
+/* ************************************************************************** */
+
+<!-- TODO: early return -->
+::scene-downtown-library [scene]
+
+<<downtown-interest library>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-home-bed-evening [sms scene]
+
+<<if $npc.riley.stat.story == 11 and $npc.girl.stat.openness >= 275>>
+	<<set $scratch.packageDeliverd to true>>
+	<<set $scratch.packageUnopened to true>>
+	<p class="">As you arrive home you find a package waiting for you outside your door.
+		Odd, you don't recall ordering anything.</p>
+<</if>>
+
+<p class="scene-nav">
+	<<set _tmp = 'Check your Computer ('+variables().emailAvailable.length+' New Mail)'>>
+	<<link _tmp scene-home-computer>>
+		<<set $scratch.tmp_computer_return_passageid to 'scene-home-bed-evening'>>
+	<</link>>
+</p>
+
+<<if $scratch.packageDeliverd and $scratch.packageUnopened>>
+	<p class="scene-nav">
+		[[Open the Package|Package]]
+	</p>
+<</if>>
+
+<p class="scene-nav">
+	[[Call it a day and go to Bed|scene-home-bed-morning]]
+</p>
+
+<<if not $scratch.hypnoBookRead and $scratch.hypnoBookBought and $scratch.hypnoContent>>
+	<p class="scene-nav">
+		[[Read the Book on Flowers|scene-flowerbook]]
+	</p>
+<<if>>
+
+<<if $npc.riley.stat.sexts >= 2
+	&& (lastVisited("scene-downtown-bar") is 1
+ 	|| lastVisited("scene-downtown-gym") is 1
+	|| lastVisited("scene-downtown-library") is 1)
+	&& random(1, 100) >= 60
+	&& $npc.riley.stat.worktrip is false>>
+		<<set _sms = 'riley.random' + $npc.player.stat.kink.toUpperFirst()>>
+		<<set $smsAvailable.push(_sms)>>
+	<</if>>
+<<endif>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-home-bed-evening-phone [sms scene]
+
+<<include endofday-sms>>
+
+<p class="scene-nav">
+	<<link Sleep scene-home-bed-morning>>
+		<<include endofday>>
+	<</link>>
+</p>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-flowerbook [scene]
+
+Yellow Oblivion: Known Effects of Yellow Oblivion
+<br/>
+Induces short term memory loss in those who are exposed to its aroma for long periods causing them to become unaware of their surroundings.
+Warnings: Prolonged exposure can lead to severe headaches and long term memory loss. To be used sparingly.
+<hr/>
+Purple Volcano: Known Effects of Purple Volcano
+<br/>
+Those who have prolonged exposure to the aroma of this flower will find there senses overloaded. Lust is the main benefactor, however other aspects may also be heightened.
+Warnings: Many have witnessed a marked increase in a subjects anger as well as their libido, best if handled with care.
+<p/>
+<<return 'Close the Book'>>

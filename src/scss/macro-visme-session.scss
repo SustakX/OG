@@ -1,0 +1,64 @@
+.computer-screen {
+    border-radius: 5px;
+    border: 25px solid black;
+	background-color: white;
+	color:black;
+
+	a {
+		color:inherit;
+		text-align: center;
+		display:block;
+
+		&:hover {
+			color:inherit;
+			border-width: 0px;
+			color:red;
+		}
+
+	}
+
+	.computer-header {
+		color:black;
+	    background-color: cornflowerblue;
+	    text-align: center;
+	}
+
+	.computer-wallpaper {
+	    position: relative;
+
+
+
+		img {
+	    	width: 100%;
+			display:block;
+		}
+
+		.email {
+
+			font-family:monospace;
+			margin:10px;
+		}
+
+		// a {
+		// 	color:black;
+		// }
+
+		.computer-content {
+		    position: absolute;
+		    top: 8px;
+		    left: 16px;
+			color:black;
+
+			a {
+			    color: inherit;
+			    text-align: left;
+				border: 4px solid transparent;
+
+				&:hover {
+				    text-decoration: none;
+				    border: 4px solid black;
+				}
+			}
+		}
+	}
+}

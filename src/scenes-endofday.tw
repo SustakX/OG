@@ -1,0 +1,243 @@
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::endofday
+
+/*Reset for new day*/
+<<set $scratch.Session = 0>>
+<!-- <<set $TimeOfDay = 1>> -->
+<<set $npc.riley.day += 1>>
+<<set $npc.player.horniness(1)>>
+<<set $scratch.GameDay += 1>>
+/*Occasionaly decay player stats*/
+<<set _decayChance = 90>>
+<<set _decayToday = random(1,100)>>
+<<if _decayToday > _decayChance>>
+	<!-- <<adjStamina "-1">> -->
+	<<stat player.staminaAdjust -1>>
+<<endif>>
+<<set _decayToday = random(1,100)>>
+<<if _decayToday > _decayChance>>
+	<!-- <<adjConcentration "-1">> -->
+	<<stat player.concentrationAdjust -1>>
+<<endif>>
+<<set _decayToday = random(1,100)>>
+<<if _decayToday > _decayChance>>
+	<!-- <<adjCommunication "-1">> -->
+	<<stat player.communicationAdjust -1>>
+<<endif>>
+/* Fix for bad stats */
+<!-- <<if $player.communication < 5>>
+	<<set $player.communication = 5>>
+<</if>> -->
+/*Reset used stats*/
+<<set $npc.player.stat.staminaLeft = $npc.player.stat.stamina>>
+<<set $npc.player.stat.communicationLeft = $npc.player.stat.communication>>
+/* Office Girls */
+<<if $npc.stella.stat.chat is true>>
+	<<set $npc.stella.stat.day = 0>>
+<<else>>
+	<<set $npc.stella.stat.day += 1>>
+<</if>>
+<<if $npc.jenny.stat.chat is true>>
+	<<set $npc.jenny.stat.day = 0>>
+<<else>>
+	<<set $npc.jenny.stat.day += 1>>
+<</if>>
+<<if $npc.sarah.stat.chat is true>>
+	<<set $npc.sarah.stat.day = 0>>
+<<else>>
+	<<set $npc.sarah.stat.day += 1>>
+<</if>>
+/* Handle Sarahs Vacation ------------------------------------------ */
+<<if $npc.sarah.stat.story == 4 and $npc.sarah.stat.attraction >= 50>>
+/* Send holiday snaps */
+<<if $npc.sarah.stat.vacation == 1>>
+	<!-- <<set $SMS.push(["I took your advice and got away from it all. Headed north to the snows. I so love the cool air up here. Really clears the head!", "office/sarah/vacation01.jpg", "Don't catch a cold"])>> -->
+<<elseif $npc.sarah.stat.vacation == 2>>
+	<!-- <<set $SMS.push(["Of course I forgot to pack any proper shoes for walking about up here! Guess it really has been too long since I got out of the office!", "office/sarah/vacation02.jpg", "LOL, classic Sarah!"])>> -->
+<<elseif $npc.sarah.stat.vacation == 3>>
+	<!-- <<set $SMS.push(["Glad I picked up these thermal panyhose though, keeping everyting nice and toasty.", "office/sarah/vacation03.jpg", "They look cute. And thick enough you don't need to shave your legs! ;)"])>> -->
+<<elseif $npc.sarah.stat.vacation == 4>>
+	<!-- <<set $SMS.push(["You mentioned my pantyhose looked thick.. not as think as you might think actually. :P", "office/sarah/vacation04.jpg", "Err.. nope but maybe that's better...?"])>> -->
+<<elseif $npc.sarah.stat.vacation == 5>>
+	<!-- <<set $SMS.push(["So you like the idea of looking through my pantyhose do you? Is this what like to see?", "office/sarah/vacation05.jpg", "Actually, yes!"])>> -->
+<<elseif $npc.sarah.stat.vacation == 6>>
+	<!-- <<set $SMS.push(["So you are a perv then... interesting. Have a good look then ;)", "office/sarah/vacation06.jpg", "Looking... and stroking..."])>> -->
+<<elseif $npc.sarah.stat.vacation == 7>>
+	<!-- <<set $SMS.push(["So you like to masturbate about your boss do you? does this help?", "office/sarah/vacation07.jpg", "I'll be saving that one for bedtime..."])>> -->
+<<elseif $npc.sarah.stat.vacation == 8>>
+	<!-- <<set $SMS.push(["I do hope you can still respect me as your boss...", "office/sarah/vacation08.jpg", "More so if anything ;)"])>> -->
+<<elseif $npc.sarah.stat.vacation == 9>>
+	<!-- <<set $SMS.push(["Well I'll be heading back to the office in the morning. So I'll just say see you soon with this...", "office/sarah/vacation09.jpg", "I look forward to it."])>> -->
+	<<set $npc.sarah.stat.story = 5>>
+<</if>>
+<<set $npc.sarah.stat.vacation += 1>>
+<<set $npc.sarah.stat.attraction += 1>>
+<</if>>
+<<set $npc.stella.stat.chat to false>>
+<<set $npc.stella.stat.seen to false>>
+<<set $npc.jenny.stat.chat to false>>
+<<set $npc.jenny.stat.seen to false>>
+<<set $npc.sarah.stat.chat to false>>
+<<set $npc.sarah.stat.seen to false>>
+/*  Decay friendship, better the friendship the less chance of decay */
+<<if $npc.stella.stat.day > 5 and $npc.stella.stat.attraction < 100>>
+<<set _friendshipDecay = random(1,100)>>
+<<if _friendshipDecay > $npc.stella.stat.attraction>>
+	<<if $npc.stella.stat.attraction > 3>>
+		<<set $npc.stella.stat.attraction -= 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $npc.jenny.stat.day > 5 and $npc.jenny.stat.attraction < 100>>
+<<if _friendshipDecay > $npc.jenny.stat.attraction>>
+	<<if $npc.jenny.stat.attraction > 3>>
+	<<set $npc.jenny.stat.attraction -= 1>>
+	<</if>>
+<</if>>
+<</if>>
+<<if $npc.sarah.stat.day > 5 and $npc.sarah.stat.attraction < 100 and $npc.sarah.stat.story != 4>>
+<<if _friendshipDecay > $npc.sarah.stat.attraction>>
+	<<if $npc.sarah.stat.attraction > 3>>
+	<<set $npc.sarah.stat.attraction -= 1>>
+	<</if>>
+<</if>>
+<</if>>
+/*Check player has initiated contact with online girl*/
+<<if $npc.riley.stat.story > 0>>
+/*So can all other calculations take place*/
+/*Dayly adjustment of girl stats*/
+	<!-- <<adjGirlAnger "-1">>
+	<<adjGirlAche "-1">> -->
+	<<stat riley.angerAdjust -1>>
+	<<stat riley.headacheAdjust -1>>
+/*Reduce openess if angry with player*/
+	<<if $npc.riley.stat.anger > 50>>
+		<!-- <<adjGirlOpen "-2">> -->
+		<<stat riley.attractionAdjust -2>>
+	<<elseif $npc.riley.stat.anger > 10>>
+		<!-- <<adjGirlOpen "-1">> -->
+		<<stat riley.attractionAdjust -1>>
+	<<endif>>
+/*Reduce horniness if suffering anger or pain*/
+	<<if $npc.riley.stat.headache > 0 or $npc.riley.stat.anger > 0>>
+		<!-- <<adjGirlHorn "-1">> -->
+		<<stat riley.horninessAdjust -1>>
+	<<endif>>
+/*Prevent lastcontact from increasing if contact not avaialble due to headache*/
+	<<if $npc.riley.stat.headache >=20>>
+		<<set $npc.riley.stat.lastcontact += 1>>
+	<<endif>>
+	<<if $npc.riley.stat.attraction < 25>>
+		<<set $npc.riley.greeting = "Dude">>
+	<<elseif $npc.riley.stat.attraction < 50>>
+		<<set $npc.riley.greeting = "Sweetie">>
+	<<elseif $npc.riley.stat.attraction < 75>>
+		<<set $npc.riley.greeting = "Hun">>
+	<<elseif $npc.riley.stat.attraction < 100>>
+		<<set $npc.riley.greeting = "Sexy">>
+	<<elseif $npc.riley.stat.attraction < 125>>
+		<<set $npc.riley.greeting = "Lover">>
+	<<else>>
+		<<set $npc.riley.greeting = "Romeo">>
+	<<endif>>
+/*Create Phone message to thank for flowers*/
+	<<if $npc.riley.stat.flowerSent is true and $scratch.GameDay > $npc.riley.stat.flowerDay+2 and $npc.riley.stat.worktrip is false>>
+		<<if $npc.riley.stat.flowerType == "N-1">>
+			<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name, thanks for the flowers. They were lovely. I'm even wearing one in my hair today. $npc.riley.name. x x x", "1", "rileyflowers/n-1.jpg"])>> -->
+		<<elseif $npc.riley.stat.flowerType == "N-2">>
+			<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name, thanks for the flowers. They were lovely. I'm even wearing one in my hair today. $npc.riley.name. x x x", "1", "rileyflowers/n-2.jpg"])>> -->
+		<<elseif $npc.riley.stat.flowerType == "H-1">>
+			<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name, thanks for the flowers. They were lovely. They smell amazing! $npc.riley.name. x x x", "1", "rileyflowers/h-1.jpg"])>> -->
+			<<set $npc.riley.stat.h1 += 1>>
+			<<set $npc.riley.stat.headache += 10>>
+		<<elseif $npc.riley.stat.flowerType == "H-2">>
+			<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name, thanks for the flowers. They were lovely. They smell amazing! $npc.riley.name. x x x", "1", "rileyflowers/h-2.jpg"])>> -->
+			<!-- <<adjGirlHorn "4">> -->
+			<<stat riley.horninessAdjust(4)>>
+			<<set $npc.riley.stat.h2 += 1>>
+			<<set $npc.riley.stat.anger += Math.round($npc.riley.stat.horniness/4)>>
+		<</if>>
+		/* All flowers have these effects */
+		<<set $npc.riley.stat.flowerSent to false>>
+		<!-- <<adjGirlOpen "1">>
+		<<adjGirlHorn "1">> -->
+		<<stat riley.attractionAdjust(1)>>
+		<<stat riley.horninessAdjust(1)>>
+	<<endif>>
+/* New mails */
+<<if $npc.riley.stat.story == 10 and $npc.riley.stat.attraction >= 250>>
+<!-- <<set $NewMail += 1>> -->
+<<set $emailAvailable.push('riley.confess')>>
+<</if>>
+/*Send Girl on a Buisness Trips at set times*/
+/*Includes check if trip failed to fire*/
+	/*Trip 1*/
+	<<if $scratch.GameDay == 14 or
+		($scratch.GameDay > 14 and $scratch.GameDay < 17 and $npc.riley.stat.worktrip is false)>>
+		<<set $npc.riley.stat.worktrip to true>>
+		<<set $npc.riley.stat.worktripnotify to false>>
+		<<set $npc.riley.stat.workTripReturn = $scratch.GameDay+4>>
+	<<endif>>
+/*Check if girl has returned from business trip*/
+	<<if $npc.riley.stat.workTripReturn == $scratch.GameDay>>
+		<<set $npc.riley.stat.worktrip to false>>
+		<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name. I'm home again after my trip. Maybe we can catch up tonight on Chat? See you there $npc.riley.greeting x x", "0"])>> -->
+	<<endif>>
+/*Check if girl is on a business trip*/
+	<<if $npc.riley.stat.worktrip is true>>
+		<<set $npc.riley.stat.lastcontact = $scratch.GameDay>> /* Prevent lack of contact from increasing whilst girl is unavailable for online chats*/
+/*Send an SMS informing the player of trip*/
+		<<if $npc.riley.stat.worktripnotify is false>>
+			<!-- <<set $SMS.push(["$npc.riley.name", "Hey $player.name. I'm going on a buisness trip, so I'll not be around to chat with for a few nights. I'll try to send you some texts whilst I'm away if I get a chance, and maybe a pic if you are very lucky ;) Be back soon!! x x", "0","",""])>> -->
+			<<set $npc.riley.stat.worktripnotify to true>>
+		<<endif>>
+	<<endif>>
+/*Check when player last chatted with online girl, and send message based on that*/
+	<<if $scratch.GameDay == $npc.riley.stat.lastcontact+5 and $npc.riley.stat.worktrip is false>>
+		<!-- <<set $SMS.push(["$npc.riley.name", "Hey now $player.name, haven't seen you online in a couple of days. Everything ok with you? Hope to see you tonight :) $npc.riley.name. x x x", "0","",""])>> -->
+		<!-- <<adjGirlAnger "1">> -->
+		<<stat riley.angerAdjust 1>>
+	<<elseif $scratch.GameDay == $npc.riley.stat.lastcontact+10 and $npc.riley.stat.worktrip is false>>
+		<!-- <<set $SMS.push(["$npc.riley.name", "$player.name! Is everything ok? Haven't heared from you in at least a week. Please let me know you are ok. I'll be online tonight hope to see you there!!", "0","",""])>> -->
+		<!-- <<adjGirlAnger "2">> -->
+		<<stat riley.angerAdjust 2>>
+	<<elseif $scratch.GameDay > $npc.riley.stat.lastcontact+10 and $npc.riley.stat.worktrip is false>>
+		<!-- <<adjGirlAnger "2">>
+		<<adjGirlOpen "-1">> -->
+		<<stat riley.angerAdjust 2>>
+		<<stat riley.attractionAdjust -1>>
+	<<endif>>
+<<endif>>
+
+<<if $npc.riley.stat.h2 == 2>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[0][0], $randomGirlH2SMS[0][1], $randomGirlH2SMS[0][2], $randomGirlH2SMS[0][3], $randomGirlH2SMS[0][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 4>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[1][0], $randomGirlH2SMS[1][1], $randomGirlH2SMS[1][2], $randomGirlH2SMS[1][3], $randomGirlH2SMS[1][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 8>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[2][0], $randomGirlH2SMS[2][1], $randomGirlH2SMS[2][2], $randomGirlH2SMS[2][3], $randomGirlH2SMS[2][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 12>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[3][0], $randomGirlH2SMS[3][1], $randomGirlH2SMS[3][2], $randomGirlH2SMS[3][3], $randomGirlH2SMS[3][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 16>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[4][0], $randomGirlH2SMS[4][1], $randomGirlH2SMS[4][2], $randomGirlH2SMS[4][3], $randomGirlH2SMS[4][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 20>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[5][0], $randomGirlH2SMS[5][1], $randomGirlH2SMS[5][2], $randomGirlH2SMS[5][3], $randomGirlH2SMS[5][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 24>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[6][0], $randomGirlH2SMS[6][1], $randomGirlH2SMS[6][2], $randomGirlH2SMS[6][3], $randomGirlH2SMS[6][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 28>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[7][0], $randomGirlH2SMS[7][1], $randomGirlH2SMS[7][2], $randomGirlH2SMS[7][3], $randomGirlH2SMS[7][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<<elseif $npc.riley.stat.h2 == 32>>
+<!-- <<set $SMS.push([$randomGirlH2SMS[8][0], $randomGirlH2SMS[8][1], $randomGirlH2SMS[8][2], $randomGirlH2SMS[8][3], $randomGirlH2SMS[8][4]])>> -->
+<<set $npc.riley.stat.h2 += 1>>
+<</if>>

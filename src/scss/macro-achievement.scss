@@ -1,0 +1,50 @@
+
+
+@keyframes zoomin {
+    0% {
+        transform: scale(.5,.5);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.achievement-screen {
+  	animation: zoomin 1s forwards;
+    display: inline-block;
+    width: 500px;
+    height: 100px;
+    background-color: pink;
+    color: deeppink;
+	 text-align: left;
+  	font-size: 110%;
+  	border-radius: 100px;
+    vertical-align: top;
+    clear: left;
+    line-height: 20px;
+
+	.achievement-left {
+	    // display: inline-block;
+	    width: 100px;
+	    height: 50px;
+	  	margin-right: 20px;
+	  	background-color: deeppink;
+	  	color: white;
+	  	padding-top: 50px;
+		  text-align: center;
+	  	font-size: 125%;
+	  	border-radius: 100px;
+	    float: left;
+	}
+	.achievement-right {
+	  	animation: fadein 5s forwards;
+	}
+}

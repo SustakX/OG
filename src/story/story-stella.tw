@@ -1,0 +1,371 @@
+/* ************************************************************************** */
+/* Story 0
+/* ************************************************************************** */
+
+::story-stella-0
+
+<<story-session-header 'pic/npc/stella/happy.jpg'>
+other 		Hey $npc.player.name, what say we swap numbers so we could, you know, maybe chat now and again?
+player 		Sounds good to me Stella!
+default 	Stella can now message you when she feels like it.
+<<set $npc.stella.stat.story = 1>>
+
+/* ************************************************************************** */
+/* Story 1
+/* ************************************************************************** */
+
+::story-stella-1
+
+<<story-session-header 'pic/npc/stella/happy.jpg'>
+other 		You've been keeping an eye on your expenses I see.
+player 		I try!
+other 		Makes a change around here! Glad to have a professional onboard.
+player 		Hey, takes one to know one You reply.
+default 	Stella laughs at that.
+// <<set $SMS.push(["Stella", "Hey $npc.player.name, thanks for coming to chat today. Always a pleasure to see you. Thought you might want a pic to add to my contact details in your phone. Enjoy! ;)", "1", "office/stella/phone01.jpg"])>>
+<<set $npc.stella.stat.story = 2>>
+
+/* ************************************************************************** */
+/* Story 2
+/* ************************************************************************** */
+
+::story-stella-2
+
+<<story-session-header 'pic/npc/location/finance.jpg'>>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	default 	As you enter Stella's office you notice she isn't really working at her computer and more just staring off into space.
+	other 		Oh, hey $npc.player.name. Listen can I ask you, are you seeing anyone right now?
+	<<linkreplace "Err, not as such. Why do you ask?">>
+		player 		Err, not as such. Why do you ask?
+		other 		Oh, I'm not sure really. Was just looking for some advice I think, but if you're not involved with anyone . . .
+		<<linkreplace "Well I'm always available to listen if you need to talk to someone?">>
+			player 		Well I'm always available to listen if you need to talk to someone?
+			other 		That's kind of you $npc.player.name, but I think I'm ok for now. Thanks for checking up on me though.
+			default 	Stella smiles at you as you head back out of her office, before returning to her work.
+			<<set $npc.stella.stat.story = 3>>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 3
+/* ************************************************************************** */
+
+::story-stella-3
+
+<<story-session-header 'pic/npc/locations/finance.jpg'>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	player 		Hi Stella.
+	default 	You say as you enter, however Stella continues to look at her computer screen, though her hands lie still on the desk.
+	<<linkreplace "Er, Hello stella?">>
+		player 		Er, hello Stella?
+		other 		Oh hello $npc.player.name, sorry was miles away there. What can I do for you?
+		<<linkreplace "I have a couple of expense forms for you.">>
+			player 		I have a couple of expense forms for you.
+			other 		Oh sure, just put them on that stack there.
+			default 	She indicates a stack of papers which is way higher than you have seen it in your time here.
+			<<linkreplace "Sure thing Stella. Everything ok?">>
+				player 		Sure thing Stella. Everything ok?
+				other 		Hmm, oh yes fine, fine. Have a good day $npc.player.name.
+				default 	And with that she returns to her screen leaving you to leave her office and return to your desk.
+				<<set $npc.stella.stat.story = 4>>
+			<</linkreplace>>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 4
+/* ************************************************************************** */
+
+::story-stella-4
+
+<<story-session-header 'pic/npc/locations/finance.jpg'>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	player 		Hi Stella.
+	other 		Hey $npc.player.name. Just the guy I was looking for. Shut the door and take a seat.
+	<<linkreplace "Sure.">>
+		default 	You take a seat opposite Stella.
+		other 		You may have noticed I've been somewhat distracted lately.
+		<<linkreplace "A little.">>
+			player 		A little.
+			default 	Stella smile at your response.
+			other 		Well. OK. Let me just say it. I've been having problems with my boyfriend. He just. Well. Seems to be getting more and more distant.
+			<<linkreplace "OK, well do you spend a lot of time together?">>
+				player 		OK, well do you spend a lot of time together?
+				other 		Actually no. I work so much, and then when I am at home he spends all his time playing games, and watching movies in the den.
+				<<linkreplace "Well which movies or games does he like?">>
+					player 		Well which movies or games does he like?
+					other 		Oh I don't know really. Star Wars I think. That one with the guys in white armor and laser guns.
+					<<linkreplace "OK, and you want to get his attention?">>
+						player 		OK, and you want to get his attention?
+						other 		Desperatly. If you know what I mean!
+						<<linkreplace "OK then...">>
+							player 		OK, then. I have an idea. How about you dress up as one of the women from Star Wars, and then just walk in on him whilst he's watching something and see what happens?
+							other 		Oh like those Cosplay girls I've seen?
+							player 		Exactly!
+							other 		Actually. That could be fun. I always loved a bit of dress up. Er, but who should I dress up as?
+							<<linkreplace "Rey!">>
+								player 		Rey!
+								other 		Rey? OK, Rey. I'll look that up and see what I can come up with. Oh this is going to be fun! I may ask you for advice when I'm putting the outfit together if that's ok?
+								player 		Not a problem at all Stella.
+								default 	And with that you leave looking the happiest she has in a while.
+								<<set $npc.stella.stat.story = 5>>
+							<</linkreplace>>
+						<</linkreplace>>
+					<</linkreplace>>
+				<</linkreplace>>
+			<</linkreplace>>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 6
+/* ************************************************************************** */
+
+::story-stella-6
+
+<<story-session-header 'pic/npc/locations/finance.jpg'>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	other 		$npc.player.name! You are my man indeed! The Rey idea went down a treat!
+	<<linkreplace "Ah! Excellent.">>
+		player 		Ah! Excellent.
+		other 		He got so excited. Worked like a charm, and now he wants to do a photoshoot with me as Rey and him as a Stormtrooper!
+		<<linkreplace "Oh, nice!">>
+			player 		Oh, nice!
+			other 		You've made me so happy too. Soon as we've taken the pics I'll be sure to send you some.
+			player 		That sounds awsome. I look forward to it!
+			default 	You leave Stella's office with her sitting with a grin as wide as the CHeshire cats on her lips.
+			<<set $npc.stella.stat.story = 7>>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 8
+/* ************************************************************************** */
+
+::story-stella-8
+
+<<story-session-header 'pic/npc/stella/story8/bfa01.jpg' '' 'topleft'>>
+
+<div id="npc-story">
+	default 	As you approach the conference room you see movement coming from within. Not wanting to interrupt anything you peek through the glass panel the runs down the side of the door into the room.
+	default 	To you shock you find Stella is stood in the middle of the room in just her underwear.
+	default 	She makes eye contact with you and with a subtle shake of the head seems to indicate that you shouldn't come in. She then turns to face another direction and says something. You are unable to hear it through the specially sound proofed door but she is clearly talking to someone else you can't see from this vantage point.
+	<<link "Wait and see what happens...">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.1>>
+		<</replace>>
+	<</link>>
+</div>
+
+::story-stella-8.1
+    <!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+    <<story-session-header 'pic/npc/stella/story8/bfa02.jpg' '' 'topleft'>>
+    default 	With a quick slipping of her hand inside her bra Stella exposes her breasts to whoever she is talking to. She manages to make the occasional glance over to you as she does so.
+    default 	Stunning! Was perfect breasts you think. You suddenly find yourself becoming very turned on by the sight of your one of your <<friendliness-label $npc.stella.stat.attraction>> getting naked inside the office building. You glance down the corridor to see if anyone else is coming but all appears clear.
+    default 	When you turn back again Stella has moved on with her show and now is
+	<<link "bending over.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.2>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.2
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa03.jpg' '' 'topleft'>>
+	default 	The sight of the fabric of her panties straining across her pussy is almost too much. And that ass. So ready for attention. Clearly whoever it is she is teasing is very much an ass man, and they have picked a good subject for their obsession.
+
+	<<if $npc.player.stat.kink != "Ass">>
+		default 	You might not be an ass man but you can't deny the charm right in this moment.
+	<<else>>
+		default 	Yup. You've always loved a good ass, and that is a very nice ass indeed!
+	<</if>>
+
+	<<link "She moves to the sofa">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.3>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.3
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa04.jpg' '' 'topleft'>>
+	default 	Stella falls to her knees on the sofa and pulls aside her panties exposing her ass and pussy for all to see. Through right now that all is the mystery guest and yourself.
+	<<if $npc.player.stat.kink != "Tits">>
+		default 	Her tits dangle delightfully and sway back and forth as she moves about on the sofa. Her nipples clearly aroused and excited by the situation.
+	<</if>>
+	default 	She eventually slips her panties off completely and then...
+	<<link "Oh my...">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.4>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.4
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa05.jpg' '' 'topleft'>>
+	default 	As she throws the panties behind the sofa and returns to a kneeling position Stella slips two fingers direct into her tiny ass hole. The look on her face is one of growing excitement. Clearly Stella is not quite the clean cut accountant you may have thought. Sure she loves a good flirt but it seems she's no shy angel.
+	default 	She begins to pump her fingers in and out slipping first to the lower knuckle and eventually to the second, before finally her whole fingers are inside her. She continues for a good minute before appearing to become unsatisfied with her fingers and reaches into her handbag for
+	<<link "something.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.5>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.5
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa06.jpg' '' 'topleft'>>
+	default 	She retrieves a glass toy and begins to lubricate it with her mouth. She takes things slowly, making a good show of it. The idea of her tongue on your cock is making your balls ache so much, but you continue to watch from the sidelines. You still can't see who it is she is putting on this show for, but you are very happy to be a silent witness to it's glory.
+	default 	Eventually happy with the slickness of the glass toy Stella returns to her
+	<<link "ass.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.6>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.6
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa07.jpg' '' 'topleft'>>
+	default 	The toy slips easily into Stella's waiting ass. Not the first time with this toy you think! There was a moment of resistance as the head caught on her recently fingered hole, but then the shaft was in and she begins working away again.
+	default 	Clearly unable to resist any more the unknown person moves into
+	<<link "view.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.7>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.7
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa08.jpg' '' 'topleft'>>
+	default 	A naken man appears and joins Stella on the sofa. As he turns you recognise him from the pictures on Stella's desk as her boyfriend, although thankfully he was more fully dressed in those.
+	default 	He takes control on Stella's toy and she immediately goes down on him, filling her mouth with his dick. Each pound he give her in the ass results in a thrust of his cock into her mouth. He seems a hundred percent focused on the job at hand so thankfully doesn't notice you but Stella gives you a look to let you know she knows you are there. The sparkle in her eye suggests she's really enjoying both what is happening and that she is being watched.
+	default 	After a few minutes they are ready to hit the
+	<<link "main event.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.8>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.8
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa09.jpg' '' 'topleft'>>
+	default 	Stella walks over the sofa and lowers herself onto her boyfriends dick, the head plunging deep into her rear. A look of joy and pleasure washes over Stella's face as he begins to pump in and out of her tight little hole.
+	default 	Stella locks eyes with you the entire time. Each thrust causing her breasts to bounce around, her hair teasing over the hardened nipples.
+	<<link "Suddenly...">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.9>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.9
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa10.jpg' '' 'topleft'>>
+	default 	Suddenly her tips her back and forces his dick even further into her. Stella's face takes on an orgasmic shift and her hands move to her tits. She begins to play with her nipples as she is filled with cock deeper and deeper.
+	default 	Then he lifts her off and lays her down on the sofa before again sliding himself into her
+	<<link "backdoor.">>
+		<<replace "#npc-story">>
+			<<story-session stella '8.10'>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.10
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa11.jpg' '' 'topleft'>>
+	default 	Her leg lifted high Stella is once again rocking back and forth with each thrust of cock into her ass. Even through the soundproofing her moans are beginning to become audible. You make another check of the corridor but it appears empty still.
+	default 	Her toes begin to point and grip as her orgasm approaches, her boyfriend gripping one breast and hammering Stella down onto his cock.
+	default 	With once final change of position they both
+	<<link "orgasm together.">>
+		<<replace "#npc-story">>
+			<<story-session stella 8.11>>
+		<</replace>>
+	<</link>>
+
+::story-stella-8.11
+	<!-- <<adjHorniness 1>> -->
+	<<stat player.horninessAdjust 1>>
+	<<story-session-header 'pic/npc/stella/story8/bfa12.jpg' '' 'topleft'>>
+	default 	There's a final thrust and an explosion deep inside of Stella. Some of his cum is squeezed back out and over Stella fingers but clearly the vast majority is now warming her from the inside.
+	default 	As they collapse onto the sofa you figure it is time to make you escape. With a wink to Stella you head off back to your chores.
+	<p class="scene-nav">
+		<<link Return $scratch.tmp_story_return_passageid>>
+			<<set $npc.stella.stat.chat = true>>
+			<<set $npc.player.stat.staminaLeft -= 2>>
+			<<set $npc.stella.stat.story = 9>>
+		<</link>>
+	</p>
+	<!--<<if $TimeOfDay == 1>>
+		[[desk.|Morning Chores][$npc.stella.stat.chat to true; $npc.player.stat.staminaLeft -= 2; $npc.stella.stat.story = 9]]
+	<<else>>
+		[[desk.|Afternoon Chores][$npc.stella.stat.chat to true;  $npc.player.stat.staminaLeft -= 2;$npc.stella.stat.story = 9]]
+	<<endif>>-->
+
+/* ************************************************************************** */
+/* Story 9
+/* ************************************************************************** */
+
+::story-stella-9
+
+<<story-session-header 'pic/npc/locations/finance.jpg'>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	other 		Well then $npc.player.name, did you enjoy that little show the other day?
+	player 		It was... most impressive, yes!
+	other 		Glad you had fun too. My boyfriend, James, didn't have a clue you were there.
+	player 		To be fair, he was pretty preoccupied!
+	other 		Haha, true. He doesn't usually have time off during the day from his photoshoots, so he decided to supprise me. Lucky we have those confrenece rooms no one ever uses.
+	player 		He's a photographer?
+	other 		Yeah, he does glamour shoots for certain mens magazines.
+	player 		Huh, well that's good to know. Never know when that could come in useful.
+	other 		I'm sure! Well thanks for being a good friend and keeping quite about things. I'll have to find some way to repay you.
+	player 		I'll leave it to your judgement Stella.
+	default 	You wink to her.
+	<<set $npc.stella.stat.story = 9.5>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 9.5
+/ <<elseif $npc.stella.stat.story == 9.5 and $npc.riley.stat.story == 4.5>>
+/* ************************************************************************** */
+
+::story-stella-9.5
+// TODO
+<<story-session-header 'pic/npc/locations/finance.jpg'>
+<<linkreplace "Enter Stella's Office">>
+	<<story-session-header 'pic/npc/stella/chatstory.jpg'>>
+	<span id="chattxt">
+	other 		Oh hey $npc.player.name, what can I do for you?
+	player 		Well actually I was hoping for a favour...
+	other 		Sure, what is it.
+	player 		You see I have this friend, we've known each other since we were kids and she's really into photography, but in her current job she's not really able to use it much despite that being what they hired her for.
+	other 		Typical!
+	player 		Yeah, so I was wondering if maybe your boyfriend could help her out?
+	other 		Well, maybe but you know he mainly does adult stuff right? He calls it erotic photography, but it's porn plain and simple.
+	player 		Well actually that's what she wants to get in to.
+	other 		Well ok then! Let me give him a call and see...
+	<<linkreplace "Stella calls him up">>
+		default 	Stella chats for a while with her boyfriend before finally moving the subject on to $girl.name. You give Stella her phone number and address information and she passes them on.
+		other 		OK, that worked out well. Apparently he's just picked up a job in her very city that he was going to have trouble getting to. So it's a bit of a risk but he's willing to take a chance on her and see where they go from there.
+		player 		Excellent! Thank you so much Stella!
+		other 		I did promise to replay you after all.
+		player 		Indeed you did. Thank you again.
+		<<set $npc.stella.stat.story = 10>>
+		<<set $npc.riley.stat.story = 5>>
+	<</linkreplace>>
+<</linkreplace>>

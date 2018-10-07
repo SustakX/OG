@@ -1,0 +1,153 @@
+::npc-chat-available
+
+<<if $npc.player.stat.staminaLeft >= 2>>
+	<<if $npc.sarah.stat.story == 4 and $npc.sarah.stat.attraction >= 50>>
+		Sarah doesn't seem to be in her office.
+	<<elseif $npc.sarah.stat.attraction >= 3 and $npc.sarah.stat.chat is false>>
+		<p class="scene-nav">[[Go chat with Sarah|scene-npc-chat][$npc.sarah.stat.chat to true;$scratch.tmp_npc_chat_npcid to 'sarah']]</p>
+	<</if>>
+
+	<<if $npc.jenny.stat.attraction >= 3 && $npc.jenny.stat.chat === false>>
+		<p class="scene-nav">[[Go chat with Jenny|scene-npc-chat][$npc.jenny.stat.chat to true;$scratch.tmp_npc_chat_npcid to 'jenny']]</p>
+	<</if>>
+
+	<<if $npc.stella.stat.attraction >= 3 && $npc.stella.stat.chat === false>>
+		<p class="scene-nav">[[Go chat with Stella|scene-npc-chat][$npc.stella.stat.chat to true;$scratch.tmp_npc_chat_npcid to 'stella']]</p>
+	<</if>>
+<<elseif ($npc.stella.stat.attraction >= 3
+	&& $npc.stella.stat.chat is false) or ($npc.jenny.stat.attraction >= 3 and $npc.jenny.stat.chat is false)>>
+	You need all your energy just to work, maybe if you were in better shape you would have time to chat with your workmates and still get your job done.
+<<endif>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-npc-chat [scene]
+
+<<npc-chat $scratch.tmp_npc_chat_npcid $scratch.tmp_npc_chat_npcid_chat_exit_passageid>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::sms-display
+
+<<sms-display>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::scene-story
+
+<<story-session-router $scratch.tmp_story_npcid>>
+
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::achievement-office-check
+
+<<if $achs['rey_of_hope'].achieved === false
+	&& $npc.stella.stat.attraction >= 100>>
+	<<achievement-unlock rey_of_hope>> <!-- 13 -->
+<<elseif $achs['girlfriends'].achieved === false
+	&& $npc.jenny.stat.attraction >= 100>>
+	<<achievement-unlock girlfriends>> <!-- 14 -->
+<<elseif $achs['a_whole_new_girl'].achieved === false
+	&& $npc.sarah.stat.attraction >= 100>>
+	<<achievement-unlock a_whole_new_girl>> <!-- 15 -->
+<</if>>
+
+::endofday-sms
+
+/* ************************************************************************** */
+/* Riley
+/* ************************************************************************** */
+
+<<if $npc.riley.stat.horniness >= 80
+	&& $npc.riley.stat.attraction >= 75
+	&& $npc.riley.stat.sexts == 0>>
+	<p class="scene-nav">
+		[[$npc.riley.name is trying to message you. Do you want to Respond?|sms-display][variables().smsAvailable.push('riley.sexts1')]]
+	</p>
+<<elseif $npc.riley.stat.horniness >= 40
+	&& $npc.riley.stat.sexts == 1.5>>
+	<p class="scene-nav">
+		[[$npc.riley.name is trying to message you. Do you want to Respond?|sms-display][variables().smsAvailable.push('riley.sexts1_5')]]
+	</p>
+<<elseif $npc.riley.stat.horniness >= 70
+	&& $npc.riley.stat.attraction >= 100
+	&& $npc.riley.stat.sexts == 2>>
+	<p class="scene-nav">
+		[[$npc.riley.name is trying to message you. Do you want to Respond?|sms-display][variables().smsAvailable.push('riley.sexts2')]]
+	</p>
+<<elseif $npc.riley.stat.horniness >= 60
+	&& $npc.riley.stat.attraction >= 100
+	&& $npc.riley.stat.sexts == 3>>
+	<p class="scene-nav">
+		[[$npc.riley.name is trying to message you. Do you want to Respond?|sms-display][variables().smsAvailable.push('riley.sexts3')]]
+	</p>
+<</if>>
+
+/* ************************************************************************** */
+/* Jenny
+/* ************************************************************************** */
+
+<<if $npc.jenny.stat.story == 4 && $npc.jenny.stat.attraction >= 45 ||
+	$npc.jenny.stat.story == 5 && $npc.jenny.stat.attraction >= 55 ||
+	$npc.jenny.stat.story == 7 ||
+	$npc.jenny.stat.story == 9 && $npc.jenny.stat.attraction >= 100>>
+	<<set _tmp = 'jenny.story' + $npc.jenny.stat.story>>
+	<p class="scene-nav">[[Jenny is messeging|sms-display][variables().smsAvailable.push(_tmp)]]</p>
+<</if>>
+
+/* ************************************************************************** */
+/* Stella
+/* ************************************************************************** */
+
+<<if ($npc.stella.stat.story == 5 && $npc.stella.stat.attraction >= 60) ||
+	($npc.stella.stat.story == 7 && $npc.stella.stat.attraction >= 80) >>
+	<<set _tmp = 'stella.story' + $npc.stella.stat.story>>
+	<p class="scene-nav">[[Stella is messeging|sms-display][variables().smsAvailable.push(_tmp)]]</p>
+<</if>>
+
+/* ************************************************************************** */
+/* Sarah
+/* ************************************************************************** */
+
+<<if ($npc.sarah.stat.story == 5 && $npc.sarah.stat.attraction >= 60) ||
+	($npc.sarah.stat.story == 7 && $npc.sarah.stat.attraction >= 80)>>
+	<<set _tmp = 'sarah.story' + $npc.sarah.stat.story>>
+	<p class="scene-nav">[[Sarah is messeging|sms-display][variables().smsAvailable.push(_tmp)]]</p>
+<</if>>
+
+/* ************************************************************************** */
+/* Really needed?
+/* ************************************************************************** */
+
+<!-- <<if $achArray[10][3] is false and $npc.jenny.stat.story >= 6>>
+		<<achUnlock 10>>
+<</if>>
+<<if $achArray[11][3] is false and $npc.stella.stat.story >= 8>>
+		<<achUnlock 11>>
+<</if>>
+<<if $achArray[17][3] is false and $npc.jenny.stat.story >= 10>>
+	<<achUnlock 17>>
+<</if>>
+<<if $achArray[18][3] is false and $npc.sarah.stat.story >= 6>>
+	<<achUnlock 18>>
+<</if>>
+<<if $achArray[7][3] is false and $npc.riley.stat.sexts >= 1>>
+	<<achUnlock 7>>
+<</if>>
+<<if $achArray[12][3] is false and $npc.riley.stat.sexts >= 3>>
+	<<achUnlock 12>>
+<</if>>
+<<if $achArray[16][3] is false and $npc.riley.story >= 7>>
+	<<achUnlock 16>>
+<</if>>
+<<if $achArray[19][3] is false and $npc.sarah.stat.story >= 10>>
+	<<achUnlock 19>>
+<</if>> -->

@@ -1,0 +1,81 @@
+.phone-screen {
+    display: inline-block;
+    width: 300px;
+    height: 555px;
+    margin: 0px 10px 10px 10px;
+    background-color: white;
+    color: black;
+    text-align: right;
+    border-radius: 10px;
+    border-top: 25px solid black;
+    border-bottom: 25px solid black;
+    border-left: 10px solid black;
+    border-right: 10px solid black;
+    vertical-align: top;
+
+	.phone-header {
+	    display: inline-block;
+	    width: 300px;
+	    background-color: cornflowerblue;
+	    text-align: center;
+	}
+
+	.phone-head {
+	    display: inline-block;
+	    width: 50px;
+	    height: 50px;
+	    margin: 10px;
+	    padding: 2px;
+	    background-color: green;
+	    color: white;
+	    border-radius: 50px;
+	    text-align: left;
+		img {
+    		width: 100%;
+    		margin: 0;
+		}
+	}
+
+	@mixin generalltext {
+		display: inline-block;
+	    width: 240px;
+	    margin: 10px;
+	    padding: 15px;
+	    border-radius: 25px;
+	    font-family: monospace;
+	    font-size: 80%;
+	    text-align: right;
+	}
+
+	.phone-message {
+		@include generalltext;
+	    background-color: green;
+	    color: white;
+	}
+
+	.phone-answer {
+		@include generalltext;
+		background-color:darkblue;
+		// a {
+		// 	margin:0px;
+		// 	padding:0px;
+		// }
+	}
+
+	.close a {
+    	color: black;
+	}
+
+	.phone-pic {
+	    // display: inline-block;
+	    // width: 300px;
+	    // height: 520px;
+	    // vertical-align: top;
+
+		img {
+		    // width: 300px;
+			width: 100%;
+		}
+	}
+
+}

@@ -1,0 +1,32 @@
+{
+  "name": "bgame4",
+  "version": "0.0.1",
+  "description": "Skeleton for development using twee2",
+  "main": "index.js",
+  "scripts": {
+    "pack": "mkdir -p upload/ && cp -r dist/ upload/bgame4-$npm_package_version/ && cd upload/ && zip -x '*/.*' -9 -r bgame4-$npm_package_version.zip bgame4-$npm_package_version/ && cd ..",
+    "watch:assets": "onchange 'assets/**/*' -i -- cp -r assets/* dist/",
+    "watch:browser": "npx reload --browser --port 8008 --dir dist/",
+    "watch:tweego": "bin/tweego_osx64 --head=head --output dist/index.html --watch src/ build/prefix/",
+    "build:prefix": "npx postcss 'build/sass/**/*.css' --use autoprefixer --dir build/prefix/",
+    "watch:prefix": "onchange 'build/sass/**/*.css' -- npm run build:prefix",
+    "build:sass": "node-sass --recursive --output build/sass src/",
+    "watch:sass": "onchange 'src/**/*.scss' 'src/**/*.sass' -i -- npm run build:sass",
+    "head": "rm head; echo '<script>' >> head; cat vendor/*.js >> head; echo '</script>' >> head; echo '<style>' >> head; cat vendor/*.css >> head; echo '</style>' >> head",
+    "clean": "rm -rf dist/ build/",
+    "init": "mkdir -p dist/ build/sass build/prefix",
+    "dev": "npm run head && npm run clean && npm run init && npm-run-all --parallel watch:*"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^8.6.4",
+    "eslint": "^5.0.1",
+    "node-sass": "^4.9.0",
+    "npm-run-all": "^4.1.3",
+    "onchange": "^4.0.0",
+    "postcss-cli": "^5.0.1",
+    "reload": "^2.3.0",
+    "watch": "^1.0.2"
+  }
+}

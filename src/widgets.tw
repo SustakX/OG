@@ -1,0 +1,123 @@
+::widgets [nobr]
+
+<<widget "scratch">>
+	<<script>>
+		const args = variables().args;
+		if(args.length !== 3) {
+			throw new Error('Expected three arguments: oparand operator operand');
+		}
+		const op1 = `variables().scratch['${args[0]}']`;
+		const cmd = `${op1} = ${op1} ${args[1]} ${args[2]}`;
+		eval( cmd );
+	<</script>>
+<</widget>>
+
+<<widget stat>>
+	<<set _key to $args[0]>>
+	<<set _val to $args[1]>>
+	<<set _min to 0>>
+	<<set _max to -1>>
+	<<if $args[2]>><<set _min to $args[2]>><</if>>
+	<<if $args[3]>><<set _ax to $args[3]>><</if>>
+	<<print "<<script>>State.variables.npc."+_key+"("+_val+", {min:"+_min+",max:"+_max+"});<</script>>">>
+	<<silently>>
+		<<replace "#story-caption">><<display "StoryCaption">><</replace>>
+		<<replace "#debug">><<display "debug">><</replace>>
+	<</silently>>
+<</widget>>
+
+<<script>>
+Macro.add('friendliness-label', {
+	handler : function() {
+
+		const val = this.args[0];
+		var content = '';
+
+		if(val === 0) {
+			content += 'Strangers';
+		} else if(val < 10) {
+			content += 'Acquaintance';
+		} else if(val < 20) {
+			content += 'Work Mates';
+		} else if(val < 40) {
+			content += 'Work Friends';
+		} else if(val < 60) {
+			content += 'Friends';
+		} else if(val < 80) {
+			content += 'Good Friends';
+		} else if(val < 100) {
+			content += 'Best Friends';
+		} else{
+			content += 'BFFs';
+		}
+
+		$(document.createDocumentFragment())
+			.wiki(`<<nobr>>${content}<</nobr>>`)
+			.appendTo(this.output);
+	}
+});
+
+Macro.add('friendliness', {
+	handler : function() {
+
+		const val = this.args[0];
+		const clazz = ('rnd_'+Math.random()).replace('.','');
+
+		var content = `<style>.bar.${clazz}:before { width:${val}px; }</style>
+			<span class='bar ${clazz}'>
+				<span class="content">`;
+
+		content += `<<friendliness-label ${val}>>`;
+
+		content += `</span></span>`;
+
+		$(document.createDocumentFragment())
+			.wiki(`<<nobr>>${content}<</nobr>>`)
+			.appendTo(this.output);
+	}
+});
+<</script>>
+
+<<script>>
+Macro.add('statDesc', {
+	handler : function() {
+
+		const val = this.args[0];
+		const clazz = ('rnd_'+Math.random()).replace('.','');
+
+		var content = `<style>.bar.${clazz}:before { width:${val}px; }</style>
+			<span class='bar ${clazz}'>
+				<span class="content">`;
+
+		if(val < 10) {
+			content += 'Minimal';
+		} else if(val < 20) {
+			content += 'Low';
+		} else if(val < 30) {
+			content += 'Weak';
+		} else if(val < 40) {
+			content += 'Average';
+		} else if(val < 50) {
+			content += 'Decent';
+		} else if(val < 60) {
+			content += 'Good';
+		} else if(val < 70) {
+			content += 'Impressive';
+		} else if(val < 80) {
+			content += 'Excellent';
+		} else if(val < 90) {
+			content += 'Superb';
+		} else if(val < 100) {
+			content += 'Masterful';
+		} else {
+			content += 'Maximum';
+		}
+
+		content += `</span></span>`;
+
+		$(document.createDocumentFragment())
+			.wiki(`<<nobr>>${content}<</nobr>>`)
+			.appendTo(this.output);
+	}
+});
+<</script>>

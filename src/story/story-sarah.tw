@@ -1,0 +1,467 @@
+/* ************************************************************************** */
+/* Story 0
+/* ************************************************************************** */
+
+::story-sarah-0
+
+<<story-session-header 'pic/location/ceo.jpg'>>
+default 	As you enter the office you hear a voice calling to you from the boss's office.
+other 		$npc.player.name. Could you come in here please.
+
+<<linkreplace "Enter the boss's office" >>
+	<<story-session-header 'pic/npc/sarah/hello.jpg' '' 'topleft'>>
+	default 	You enter the office and a met with the sign of your boss Mrs James standing to greet you.
+	other 		Ah yes. Thank you $npc.player.name. I just wanted to check in with you and make sure you are settling in here ok?
+	<<linkreplace "Yes thank you Mrs James" >>
+		player		Yes thank you Mrs James
+		other 		Oh please, call me Sarah. I prefer to keep the office environment informal. You only need to call me Mrs James if we have customers visiting or the like.
+		<<linkreplace "OK Sarah." >>
+			player 		OK Sarah. You smile at her.
+			other 		Well I'm always here if you need anything, but otherwise please continue with your assignments.
+			<<achievement-unlock whos_the_boss>>
+			<p class="scene-nav">
+				[[Return to you desk.|scene-work-afternoon][$npc.sarah.stat.attraction = 3;$npc.sarah.stat.story = 1;]]
+			</p>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 1
+/* ************************************************************************** */
+
+::story-sarah-1
+
+<<story-session-header 'pic/npc/sarah/hello.jpg' '' 'topleft'>>
+other	Actually $npc.player.name, I was thinking you should have my cell number so if you need to get in touch at any point you can get hold of me.
+player		Sure boss!
+default		You enter her details into your phone. She already has your number as part of your employee details.
+<<set $npc.sarah.stat.story = 2>>
+//<<set $SMS.push(["Sarah", "Hey $npc.player.name, thanks for coming to chat today. Always a pleasure to see you. Thought you might want a pic to add to my contact details in your phone. Enjoy! ;)", "1", "office/sarah/phone01.jpg"])>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 2
+/* ************************************************************************** */
+
+::story-sarah-2
+
+<<story-session-header 'pic/npc/sarah/story2/gym01.jpg'>>
+
+<div id="npc-story">
+	<<linkreplace "Enter Sarah's Office">>
+		default 	Sarah heads into one of the private rooms you can rent to workout without having to wait for other people to be finished with the machines. She must be doing ok for cash if she can splash out on one of those.
+		player 		Hey Sarah.
+		other 		Oh hey $npc.player.name. I didn't know you used this gym.
+		player 		I've not been coming her long to be fair.
+		other 		Well, as you are her do you want to help me workout?
+		<<link "I'm sure I can manage that.">>
+			<<replace "#npc-story">>
+				<<story-session sarah 2.1>>
+			<</replace>>
+		<</link>>
+	<</linkreplace>>
+</div>
+
+/* ************************************************************************** */
+/* Story 2.1
+/* ************************************************************************** */
+
+::story-sarah-2.1
+	<<story-session-header 'pic/npc/sarah/story2/gym02.jpg'>>
+	default		After a few minutes with a kettle bell Sarah takes a breather on the workout bench.
+	other 		Phew, I shouldn't have had that Coke with my lunch. Way to hard to squat with all that carbonated drink in me!
+	player 		A few minutes breather shouldn't hurt.
+	other 		No, no. Not too much. So tell me $npc.player.name how are you enjoying your work with us?
+	player 		It's been pretty good so far actually. And Jenny and Stella have been very supportive.
+	other 		Oh I'm sure they have.
+	default 	She laughs.
+	player 		Well a good office environment is always a good thing, wouldn't you say?
+	other 		Very true. So long as you don't spend all your time with them.
+	player 		Oh no, I still get my work done I assure you.
+	other 		Well, actually, I meant more that you don't ignore me.
+	default 	She suddenly looks like she said a bit too much.
+
+<<link "Of course not. Shall we get back to it?">>
+	<<replace "#npc-story">>
+		<<story-session sarah 2.2>>
+	<</replace>>
+<</link>>
+
+/* ************************************************************************** */
+/* Story 2.2
+/* ************************************************************************** */
+
+::story-sarah-2.2
+<<story-session-header 'pic/npc/sarah/story2/gym03.jpg'>>
+	default 	Sarah finished her final set of crunches and sits back up on the bench.
+	other 		Well that should make sure the skirt isn't too tight tomorrow!
+	player 		Abs of steel!
+	default 	You wink to her
+	other 		Thanks for helping me out here $npc.player.name. I don't like to be out in the main room, but it's nice not to just be totally alone.
+	player 		No problem. I know what you mean. It can be quite lonely just exercising away.
+	other 		As can being the boss...
+	player 		Hmm, I suppose so.
+	other 		I love my job, but I do rather miss just being one of the girls. Anyway, lets do some leg raises.
+
+<<link "Sounds tough!">>
+	<<replace "#npc-story">>
+		<<story-session sarah 2.3>>
+	<</replace>>
+<</link>>
+
+/* ************************************************************************** */
+/* Story 2.3
+/* ************************************************************************** */
+
+::story-sarah-2.3
+	<<story-session-header 'pic/npc/sarah/story2/gym04.jpg'>>
+	other 		Enjoying the view?
+	player 		Oh sorry.
+	default 	You avert your eyes from her perfect behind.
+	other 		Don't worry about it. It's nice to be appreciated.
+	default 	She winks again.
+	player 		Well if you insist.
+	default 	After a few more sets Sarah is all done for the evening.
+	other 		Well thanks again for the company $npc.player.name, maybe we can do it again sometime?
+	player 		You can count on it!
+
+	<<adjStamina 2>>
+	<<adjHorniness 2>>
+	[[Home|Bedroom][$sarah.story = 3]]
+
+/* ************************************************************************** */
+/* Story 3
+/* ************************************************************************** */
+
+::story-sarah-3
+
+<<linkreplace "Enter Sarah's Office">>
+<<story-session-header 'pic/npc/sarah/hello.jpg' '' 'topleft'>>
+
+player		Hey Sarah.
+
+default		Sarah doesn't seem to respond.
+
+player		Earth to Sarah, come in Sarah....
+
+other		Oh hey $npc.player.name. What can I do for you.
+
+player		Oh, nothing in particular, I was just checking in.
+
+other		Sorry, yes. I ...
+
+player		Yes Sarah?
+
+other		Hmmm. I'm sorry. Again. I'm just feeling a bit overworked at the moment. I can normally keep on top of the stress with my time at the gym, but lately even that hasn't been enough.
+
+player		Sounds like you could use a vacation.
+
+other		Oh wow. I haven't taken a vacation in years.
+
+player		Then it's about time surely?
+
+other		Do you know what. You might be on to something there! Yes I think that might be a very good idea indeed.
+
+default		You leave Sarah looking much more upbeat than when you entered.
+
+<<set $npc.sarah.stat.story = 4>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 6
+/* ************************************************************************** */
+
+::story-sarah-6
+
+<<linkreplace "Enter Sarah's Office">>
+<<story-session-header 'pic/npc/sarah/hello.jpg' '' 'topleft'>>
+
+other		Oh hey $npc.player.name, take a seat I wanted to discuss something with you.
+
+player		Uh-oh.
+
+other		Haha, don't worry it's a good thing. You see you've been doing very well for us in your role and I was thinking that maybe you should visit our parent company VIStech.
+
+player		VIStech HQ? Cool.
+
+other		Yeah. Might be good to get out and see another city for once!
+
+player		Oh, it's not here?
+
+other		No it's over in Solana.
+
+player		Solana? No way. I have a friend who lives there.
+
+other		Oh? What's her name?
+
+player		$npc.sarah.name. Wait.. it could have been a guy...
+
+other		Yeah right. Well yes, that could be good then. Hmm, maybe we could even save on a hotel if you have a place to crash...
+
+player		Err.. yeah.. Oh yeah that could be cool.
+
+other		Well nothing it confirmed yet. Leave it with me and once everything is more solid you can look into the options then.
+
+player		Excellent. Yes. I'll await your word.
+
+<<set $npc.sarah.stat.story = 7>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 8
+/* ************************************************************************** */
+
+::story-sarah-8
+
+<<linkreplace "Enter Sarah's Office">>
+<<story-session-header 'pic/npc/sarah/hello.jpg' '' 'topleft'>>
+
+other		OK $npc.player.name. That trip I talked about. Everything is in place so as soon as you are ready we can sort it out.
+
+player		Oh cool! I'll chat with my friend about it tonight then!
+
+other		Yup you do that. Then let me know how you want to go about it and we'll get everything sorted on our end.
+
+player		Thanks Sarah. This is a really cool opportunity you have given me.
+
+other		Hey, you scratch my back I scratch yours right?
+
+player		Always.
+
+<<set $npc.sarah.stat.story = 9>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 9
+/* ************************************************************************** */
+
+::story-sarah-9
+
+<<story-session-header 'pic/location/ceo.jpg' '' ''>>
+
+<div id="npc-story">
+	<<linkreplace "Enter Sarah's Office">>
+	default		You enter Sarah's office but she isn't here. You are about to return to your desk when you get an SMS from Sarah asking you to meet a new intern in the confererence room. She was supposed to meet her but she's gotten tied up at one of the customers.
+	<<link "Head to the conference room.">>
+		<<replace "#npc-story">>
+			<<story-session sarah 9.1>>
+		<</replace>>
+	<</link>>
+	<</linkreplace>>
+</div>
+
+/* ************************************************************************** */
+/* Story 9.1
+/* ************************************************************************** */
+
+::story-sarah-9.1
+	<<story-session-header 'pic/npc/sarah/intern01.jpg' '' 'topleft'>>
+	default		You enter the conference room ans see a woman standing there.
+	player		Err. Hello Sarah?
+	other		I'm sorry sir, you must have me confused with someone else. I'm just Gemma, the new intern.
+	player		Oh? Ohhhhh. Yes of course. The new intern. Well please to meet you Gemma.
+	<<link "Shake hands.">>
+		<<replace "#npc-story">>
+			<<story-session sarah 9.2>>
+		<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.2
+/* ************************************************************************** */
+
+::story-sarah-9.2
+	<<story-session-header 'pic/npc/sarah/intern02.jpg' '' 'topleft'>>
+	other	Pleased to meet you. So how should we proceed.
+	<<link "Take a seat.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.3>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.3
+/* ************************************************************************** */
+
+::story-sarah-9.3
+	<<story-session-header 'pic/npc/sarah/intern03.jpg' '' 'topleft'>>
+	other	Thank you sir.
+	<<link "Actually make yourself more comfortable.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.4>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.4
+/* ************************************************************************** */
+
+::story-sarah-9.4
+	<<story-session-header 'pic/npc/sarah/intern04.jpg' '' 'topleft'>>
+	other	Oh like this?
+	<<link "Hmm. Nice ass, get on your knees.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.5>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.5
+/* ************************************************************************** */
+
+::story-sarah-9.5
+	<<story-session-header 'pic/npc/sarah/intern05.jpg' '' 'topleft'>>
+	other	Are you sure this is procedure sir?
+	<<link "Very much so. Now lift your dress.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.6>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.6
+/* ************************************************************************** */
+
+::story-sarah-9.6
+	<<story-session-header 'pic/npc/sarah/intern06.jpg' '' 'topleft'>>
+	other	But sir, this seems very irregular.
+	<<link "Do you not like the attention?">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.7>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.7
+/* ************************************************************************** */
+
+::story-sarah-9.7
+	<<story-session-header 'pic/npc/sarah/intern07.jpg' '' 'topleft'>>
+	other	Well, it is nice. But what does it have to do with working for you?
+	<<link "Well you want to plese your boss don't you? Now remove the dress.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.8>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.8
+/* ************************************************************************** */
+
+::story-sarah-9.8
+	<<story-session-header 'pic/npc/sarah/intern08.jpg' '' 'topleft'>>
+	other	My dress? Like this sir?
+	<<link "All the way off.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.9>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.9
+/* ************************************************************************** */
+
+::story-sarah-9.9
+	<<story-session-header 'pic/npc/sarah/intern09.jpg' '' 'topleft'>>
+	other	Sorry sir. Of course sir.
+	<<link "And how about that bra?">>
+	<<replace "#npc-story">>
+		<<story-session sarah '9.10'>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.10
+/* ************************************************************************** */
+
+::story-sarah-9.10
+	<<story-session-header 'pic/npc/sarah/intern10.jpg' '' 'topleft'>>
+	other	My bra sir?
+	<<link "Yes take it off please.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.11>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.11
+/* ************************************************************************** */
+
+::story-sarah-9.11
+	<<story-session-header 'pic/npc/sarah/intern11.jpg' '' 'topleft'>>
+	other	But sir. No one has seen my breast before. I'm only a young girl.
+	<<link "You're old enough to work here, so you're old enough to show me those wonderful tits!">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.12>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.12
+/* ************************************************************************** */
+
+::story-sarah-9.12
+	<<story-session-header 'pic/npc/sarah/intern12.jpg' '' 'topleft'>>
+	other	Do you really think they are wonderful?
+	<<link "Yes, now keep going.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.13>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.13
+/* ************************************************************************** */
+
+::story-sarah-9.13
+	<<story-session-header 'pic/npc/sarah/intern13.jpg' '' 'topleft'>>
+	other	Yes sir.
+	<<link "Now drop that hand!">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.14>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.14
+/* ************************************************************************** */
+
+::story-sarah-9.14
+	<<story-session-header 'pic/npc/sarah/intern14.jpg' '' 'topleft'>>
+	other	As you wish sir.
+	<<link "Hmm. That took too long, turn around for a spank.">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.15>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.15
+/* ************************************************************************** */
+
+::story-sarah-9.15
+	<<story-session-header 'pic/npc/sarah/intern15.jpg' '' 'topleft'>>
+	other	Oh a spank. Yes sir!
+	<<link "Whack!">>
+	<<replace "#npc-story">>
+		<<story-session sarah 9.16>>
+	<</replace>>
+	<</link>>
+
+/* ************************************************************************** */
+/* Story 9.16
+/* ************************************************************************** */
+
+::story-sarah-9.16
+	<<story-session-header 'pic/npc/sarah/intern16.jpg' '' 'topleft'>>
+	other		Oww! Thank you sir...
+	player		Good. Now run along. We have a lot of work to do Sar.. I mean Gemma.
+	other		Yes sir. Thank you sir.
+	<<achievement-unlock intern>>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+	<<set $npc.sarah.stat.story = 10>>
+	//<<set $SMS.push(["Sarah", "Thank you for taking care of that intern. It's hard always being the one giving orders.", 0, "", "No problem Sarah. Any time you want ;)"])>>

@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*
+/* ************************************************************************** */
+
+::debug
+<style>
+	ul.toggle > li > ul {
+		display:none;
+	}
+</style>
+<<script>>
+	/* var ignoreEntries = ['sms', 'log', 'hypno', 'porn', 'encounter', 'achs', 'header']; */
+	var ignoreEntries = [];
+
+	function toList(obj) {
+		var ret = '<ul class="toggle">';
+		_.each(obj, function(val, key) {
+			if(_.isString(key) && ignoreEntries.indexOf(key) > -1) {
+				/* ignore */
+			} else if(_.isFunction(val)) {
+				val = 'function()';
+			}
+			else if(_.isObject(val)) {
+				var x = '<ul>';
+				_.each(val, function(val1, key1) {
+					if(_.isString(key1) && ignoreEntries.indexOf(key1) > -1) {
+						/* ignore */
+					} else if(_.isFunction(val1)) {
+						val = 'function()';
+					}
+					else if(_.isObject(val1)) {
+						x += `<li><b>${key1}</b>: `+toList(val1)+`</li>`;
+					} else {
+						val1 = (''+val1)
+							.replace('<<', '').replace('>>', '')
+							.replace('[[', '').replace(']]', '')
+							.replace('$', '');
+						x += `<li><b>${key1}</b>: ${val1}</li>`;
+					}
+				},this);
+				x += '</ul>';
+				val = x;
+			}
+			val = (''+val)
+				.replace('<<', '').replace('>>', '')
+				.replace('[[', '').replace(']]', '')
+				.replace('$', '');
+			ret += `<li><b>${key}</b>: ${val}</li>`;
+		},this);
+		ret += '</ul>';
+		return ret;
+	}
+
+	if (State.variables.debug === true) {
+
+		const smsLink = `[[SMS Test|sms-display][$smsAvailable.push('riley.sexts1')]]`;
+
+		var content = ' ' + State.passage
+			+ `<hr/>${smsLink}<hr/>`;
+		content += toList(State.variables);
+
+		$('<div id="debug"><b>Debug</b>')
+			.wiki(`<<nobr>>${content}<</nobr>>`)
+			.appendTo(this.output);
+	}
+<</script>>

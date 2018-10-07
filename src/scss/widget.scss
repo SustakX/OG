@@ -1,0 +1,36 @@
+.desc {
+	text-align: center;
+	font-style: italic;
+}
+
+.header {
+	img {
+		width: 100%;
+		display:block;
+		border-radius:10px;
+		border:2px solid lightgray;
+	}
+}
+
+.sidebar .bar {
+	display:inline-block;
+	width:100%;
+	background-color:#333;
+	position:relative;
+	padding-left:2px;
+	&:before{
+		content:'';
+		display:block;
+		position:absolute;
+		top:0;
+		left:0;
+		width:50%;
+		height:100%;
+		background-color: rgb(40,111,222);
+	}
+}
+
+.content {
+	display:inline-block;
+	position:relative;
+}

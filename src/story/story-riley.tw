@@ -1,0 +1,354 @@
+/* ************************************************************************** */
+/* Story 0
+/* ************************************************************************** */
+
+::story-riley-0
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+other	Hey $npc.player.name! Glad to see you got this installed. It's been so long since we've spoken.
+player	It has indeed. Funny I was actually just thinking about you when your mail showed up in my inbox.
+other	Really! And what exactly where you thinking about?
+player	Oh you know, how I missed our talks, and just seeing you everyday.
+other	Awww, that's so sweet $npc.player.name! But yeah, I was thinking just the same thing. Hey how about we make a deal. After work each day we both log on here and chat to each other just like the old days. What ya think about that?
+player	Actually that sound like a great idea. It's a deal.
+other	Deal! This is going to make settling in here a whole lot easier. Thanks for always being there for me $npc.player.name.
+player	Hey, don't mention it. It's always a pleasure spending time with you.
+other	Awwww. Hey listen, perhaps we could swap cell numbers. That way if I get bored at work, which I do like always, I could send you a message?
+default	Seemed like a good plan, so you swapped numbers with her and even exchanged home addresses at the same time. You never know when you might want to send her something!
+// <<set $SMS.push(["$npc.riley.name", "Hey $npc.player.name, was great chatting with you tonight. Thanks for getting in touch, hopefully we can do it again soon.\n Sleep well! x x x", "0","",""])>>
+<<set $npc.riley.stat.story = 1>>
+
+/* ************************************************************************** */
+/* Story 1
+/* ************************************************************************** */
+
+::story-riley-1
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+other You know $npc.player.name, it's been so good talking to you again. Really makes me feel at home even though I'm still new to this city and we're both so far from where we grew up.
+
+<div id="choice1">
+	<<link "Same here $npc.riley.name. You really are a special lady you know?">>
+		<<replace #choice1>>
+			player Same here $npc.riley.name. You really are a special lady you know?
+			other Awww, you can be so cute when you want to $npc.player.name. And I have to say I love it!
+			<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+			// <<adjotherOpen "2">>
+		<</replace>>
+	<</link>>
+	<br/>
+	<<link "Same here $npc.riley.name. You really are a sexy lady you know?">>
+		<<replace #choice1>>
+			player Same here $npc.riley.name. You really are a sexy lady you know?
+			other Oh my. Erm thank you $npc.player.name. You're not so bad yourself.
+			<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+			// <<adjotherHorn "1">>
+		<</replace>>
+		<<visme-session-header 'pic/npc/riley/visme/hornyLevel1.jpg'>>
+	<</link>>
+ </div>
+
+ <<set $npc.riley.stat.story = 2>>
+
+ /* ************************************************************************** */
+ /* Story 1.5 (if $npc.riley.sexts == 1)
+ /* ************************************************************************** */
+
+::story-riley-1.5
+
+<<visme-session-header 'pic/npc/riley/visme/worry.jpg'>>
+other Hey $player.name.. $npc.riley.greeting.. thanks for understanding about the other night. I don't normally take a risk like that, but I just couddn't stop myself.. I know we've been friends for like, foever, and I don't want to lose that.. but, you know.. I was kind of getting the idea that maybe we could be more than that...
+<<linkreplace "Hey, like I said don't worry about it. It really was kinda fun you know? You really are a sexy girl and I certainly can't say I didn't like what I saw!">>
+	<<visme-session-header 'pic/npc/riley/visme/hornyLevel1.jpg'>>
+	player Hey, like I said don't worry about it. It really was kinda fun you know? You really are a sexy girl and I certainly can't say I didn't like what I saw!
+	other Thanks $npc.riley.greeting. Maybe we can try it again some time then.....
+	player I'll hold you to that!
+	// <<adjGirlHorn "3">>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+<</linkreplace>>
+<<set $npc.riley.stat.sexts = 1.5>>
+
+/* ************************************************************************** */
+/* Story 2
+/* ************************************************************************** */
+
+::story-riley-2
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player You know $npc.riley.name, we've been chatting for a while again now, and I know you are working in an office. But what is it you are actually doing? Does it have anything to do with the arts degree you took?
+other Actually no, not really. I thought it might make use of my skills but turns out not much. The company I work for they produce a lot of magazines, you know the sort those weekly 'womens' magazines that continue to sell despite no one claiming to buy them.
+<<linkreplace "I hear they are popular in doctors waiting rooms and the like...">>
+	<<visme-session-header 'pic/npc/riley/visme/worry.jpg'>>
+	player I hear they are popular in doctors waiting rooms and the like...
+	other Yeah. Maybe. Well I was supposed to be working with some of the article writers here taking photos to go along with their words, however the week I started a new boss joined and they decided to just pick up stock photos from the web. So that's what I do now, search the web for other peoples photos to go along with all these crappy articles.
+	<<linkreplace "I'm sorry to hear that $npc.riley.name.">>
+		player I'm sorry to hear that $npc.riley.name. You were always quite a good photographer. I still have quite a few of your old photos around here somewhere to remind me of home. Well, the good memories of home. Those with you in them.
+		other Aww, that's so cool! $player.name. Yeah I really do miss it. Did so many different things at uni. Loved doing portraits the most. Working with people. Was so much fun! I even ended up doing some boudoir photos for some of my friends to send to their boyfriends. That was so much fun. Dressing up in overly revealing outfits. You boys really are too easy to please sometimes.
+
+		<<linkreplace "Well we wouldn't want to disappoint you.">>
+			<<visme-session-header 'pic/npc/riley/visme/flirty.jpg'>>
+			player Well we wouldn't want to disappoint you.
+			other LOL sure... yeah I do miss all that. But now there's rent to pay and bills all the time. And these days a job's a job I guess.
+			player Yeah I suppose so. Sorry you're not enjoying your work.
+			other Well me and almost everyone else right?
+			player True. True.
+			<<set $npc.riley.story = 3>>
+			<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+		<</linkreplace>>
+	<</linkreplace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 3
+/* ************************************************************************** */
+
+::story-riley-3
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player		 $npc.riley.name, that stuff you were talking about with your photography...
+other		m, oh yeah. What about it?
+player		ll have you thought about giving it another go? Maybe outside of work hours?
+other		t really. I'm not really sure where to begin with that.
+player		 right. I thought maybe you knew some people who worked in the industry from out of your old class mates.
+other		pe, only a few ended up focusing on photography, and none of them in anything I would be interested in doing.
+
+<<linkreplace "And what exactly would you be interested in doing?">>
+	player		And what exactly would you be interested in doing?
+	other		Well this is going to make you think I'm a real dirty girl, but well I was thinking of doing something with like, glamour or rather more than that. Maybe some actual erotic photography...
+	player		Oh really? What of men?
+	other		Actually no. I was thinking women. It's not that I like women. Well no, I do like women of course, I have loads of girlfriends, but I don't get that turned on by women really, but.. well I think it's the whole idea of turning men on. Like, I'm thinking of how a man would react to seeing the photos I'm taking and that thought well. Well I really like it.
+	player		Huh, OK. I think I can see how that would work.
+	other		Yeah. Like, I try to think of it as being an artist where my canvas is other women's bodies. If that makes any sense.
+	player		Yeah I guess so. Hmm. Interesting. I'll have to see if I can think of anyway to help you my dear $npc.riley.name.
+	other		Hey, if you think of anything I'm all ears. You really are a good friend $player.name. Love you so much $npc.riley.greeting.
+	<<set $npc.riley.story = 4>>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+	<</replace>>
+<</linkreplace>>
+
+/* ************************************************************************** */
+/* Story 4
+/* ************************************************************************** */
+
+::story-riley-4
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player		You know $npc.riley.name I have a friend at work whose boyfriend is in the photography business. Do you want me to see if he can give you any help with getting you back to what you love?
+other		Oh really? Well, yes, yes that would be great. Fantastic in fact!
+player		OK, well I'll see what I can do. Not sure how many connectiong he has or anything but it worth a try I would say.
+other		Definitly! This could be so cool. If I could finally get back to some real photography work... oh $player.name you really are the best you know!
+player		What else are friends for?
+other		Benefits...
+player		$npc.riley.name! Well, I wouldn't say no.
+other		Hehe, good. I wouldn't want you too...
+<<set $npc.riley.story = 4.5>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 5
+/* ************************************************************************** */
+
+::story-riley-5
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player		Evening $npc.riley.name
+other		$player.name! $npc.riley.greeting! You are just amazing. I had a call today from tha boyfriend of your workmate. Stella is it?
+player		Oh yes! Already, thats good.
+other		Good? It's more than good! Although now I need to get all my stuff sorted and get back into some real photography work. You don't know how happy this make me!!
+player		I'll have my fingers crossed for you then. Let mw know how it goes ok?
+other		Of course! Arrrghhh! I just can't wait!
+<<set $npc.riley.story = 5.5>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 6
+/* ************************************************************************** */
+
+::story-riley-6
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+
+<div id="npc-story">
+	other 	What a day!
+	player	How was it???
+	other	Just the best! I can't beleive I got to do that. And they loved the results!
+	player 	Cool!
+	other 	Very! Here let me send you some of the shots I took.
+
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.2>>
+		<</replace>>
+	<</link>>
+</div>
+
+::story-riley-6.2
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie01.jpg'>>
+	other		The model was called Goldie. We had an idea for a shoot of an artist at work. She's so cute!
+	player		Nice idea!
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.3>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.3
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie02.jpg'>>
+	other		When she looked my in the eye I could feel a real connection. We got on really well.
+	player		I bet you did ;)
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.4>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.4
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie03.jpg'>>
+	other		Cheeky! She definitly had a sexy energy though.
+	player		Maybe she fancied you...
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.5>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.5
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie04.jpg'>>
+	other		Stop it. Do you think so?
+	player		Well I am biased in that reguard...
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.6>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.6
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie05.jpg'>>
+	other		Hehe true. :P Our lighting guy was constantly cracking us up too.
+	player		So I see :D
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.7>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.7
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie06.jpg'>>
+	other		She's way too good at looking innocent for such a dirty lady.
+	player		I guess that's what makes her a pro.
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.8>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.8
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie07.jpg'>>
+	other		It was kinda weird being so close, and so focuesed on another womans private areas. But I kept thinking to myself, what would $player.name like and that kinda of got me through.
+	player		You certainly have a clear idea of that. Working very nicely over here thank you ;)
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.9>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.9
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie08.jpg'>>
+	other		I er, I actually got quite wet watching her and thinking about you seeing these pics.
+	player		Oh really?? :P
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.10>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.10
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie09.jpg'>>
+	other		Almost as much as I am now thinking about you getting hard looking at these pics I made.
+	player		Well I am definitly that!
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.11>>
+		<</replace>>
+	<</link>>
+
+::story-riley-6.11
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie10.jpg'>>
+	other		Funny that shit shot should come up now, that's pretty much how I'm sitting right now...
+	player		Tease!
+	<<link "Accept File Transfer">>
+		<<replace "#npc-story">>
+			<<story-session riley 6.12>>
+		<</replace>>
+	<</link>>>
+
+::story-riley-6.12
+	<<visme-session-header 'pic/npc/goldie/shoot/goldie11.jpg'>>
+	other		See...
+	player		Woah, that's you!?
+	other		Yup. I'll send you to bed with that image :P Night Night $npc.riley.greeting...
+	player		Girl!
+	// <<<achUnlock "16">>
+	<<achievement-unlock erotica>>
+	<<set $npc.riley.story = 7>>
+	<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 7
+/* ************************************************************************** */
+
+::story-riley-7
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player		Evening $npc.riley.name, so how are things going with the photography?
+other		Really good $npc.riley.greeting. I've had a few more shoots already, although they have set me a challange.
+player		Oh? What sort of challange?
+other		Well, they are looking to expand their portfolio of models, so they've asked if I know anyone who would be interested. I still don't know many people in the area so I'm not sure who I could even ask. I tried Roxy but she said it wasn't really for her.
+player		Hmm, she would have been my suggestion. Well iI'm not sure how I can help you this time..
+other		Oh you've done more than enough already $player.name. I'll just have to see who I can convince! ;)
+<<set $npc.riley.story = 7.5>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 8
+/* ************************************************************************** */
+
+::story-riley-8
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+other		Oh $player.name. Had my first shoot today with that girl Sunny you sent my way.
+player		Cool, how did it go?
+other		Fantastic! Well, it took us a few attempts to find the right way to work together on it, but in the end we really started clicking and the client loved the shots we put together. It's going into some magazine over in Europe somewhere. I'm actually getting my shots published in a good old fashioned magazine.
+player		Excellent. I knew you could do it!
+other		You always did believe in me more than I did in myself. What would I do without you $player.name?
+player		Oh you'd do OK, just maybe not get so horny...
+other		LOL! Actually, you're not wrong :P Thanks again.
+<<set $npc.riley.story = 9>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>
+
+/* ************************************************************************** */
+/* Story 9
+/* ************************************************************************** */
+
+::story-riley-9
+
+<<visme-session-header 'pic/npc/riley/visme/happy.jpg'>>
+player		So $npc.riley.name. I have something special to ask you about...
+other		Oh well this sounds interesting. What is it?
+player		My boss has offered me the chance to visit our head quarters.
+other		OK, well that soulds like you are moving up in the world!
+player		Well, actually, I'm not so interested in what the trip is about, and more about where the trip is...
+other		What do you mean?
+player		well... it turns out the companies HQ is in Solana!
+other		wait. As in here where I live?
+player		The very same!
+other		Oh my. I mean, wow. I mean.. oh this could be interesting...
+player		Yeah, so I was wondering if I should have my company book a hotel room or....
+other		Not on your life! You are soooooo staying here with me!!!!
+player		I was rather hoping you would say that!
+other		Well what else did you think I would say dummy! :D Oh wow. I have to plan stuff... heheheh
+player		So I can inform my boss that it is all clear and I'd like to take up her offer?
+other		Do it. Do it now!!!
+default 	You send an SMS to Sarah to go ahead with the planning of the trip. She responds that she will get everything sorted and then let you know when it will be.
+<<set $npc.riley.story = 10>>
+<p class="scene-nav"><<link Return $scratch.tmp_story_return_passageid>><</link>></p>

@@ -1,0 +1,81 @@
+twsplit_Achievements.tw
++twsplit_Afternoon.tw				::scene-work-afternoon
++twsplit_Afternoon_Chores.tw		::scene-work-evening
++twsplit_Bar.tw						::scene-downtown-bar
+twsplit_Bed.tw						(contains:END-OF-DAY+)
++twsplit_Bedroom.tw
++ twsplit_Book.tw
++ twsplit_Calm.tw
+twsplit_Change_Log.tw
+twsplit_Chat.tw
++ twsplit_Chatting_[widget].tw		macro-npc-talk.js	&	<<widget story>>->story-*.tw
++twsplit_Computer.tw
+twsplit_Credits.tw
+twsplit_Disclaimer.tw
++twsplit_Downtown.tw				::scene-downtown
++ twsplit_Flirt.tw
+twsplit_Flower_Shop.tw
+twsplit_Game_Info.tw
++ twsplit_GirlStory.tw				macro-visme-session.js & story-*.tw
++twsplit_Girl_Sexts.tw				database-sms.js | TODO: copy logic
+twsplit_Gym.tw						::scene-downtown-gym
+twsplit_Hypno.tw
+twsplit_Introduction.tw
+twsplit_Jenny_Chat.tw
++twsplit_Jenny_SMS.tw				database-sms.js
++twsplit_Library.tw					::scene-downtown-library
++twsplit_Lunch.tw
++twsplit_Lunch_Event.tw
++twsplit_Morning_Chores.tw
+-twsplit_Online_Girl_1.0.tw
+twsplit_Package.tw
+twsplit_Phone.tw
+twsplit_Read_Mail.tw
++ twsplit_Read_Message.tw			macro-sms.js
+- twsplit_Reset_Arrays.tw
++twsplit_SMS_Chat_01.tw				database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0102ass.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0102eyes.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0102feet.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0102tits.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0103ass.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0103feet.tw		database-sms.js | TODO:copy logic
++twsplit_SMS_Chat_0103tits.tw		database-sms.js | TODO:copy logic
+twsplit_SMS_Widgets_[widget].tw
+twsplit_Sarah_Chat.tw
++twsplit_Sarah_Meeting.tw			story-sarah.tw
++twsplit_Sarah_SMS.tw				database-sms.js
++twsplit_Sarah_Workouts.tw			database-story.js
++ twsplit_Session.tw				macro-visme-session.js
++twsplit_Sext_Session_01.tw			database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0102.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0103.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0104a.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0104b.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0105.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0106.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0107.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0108.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0109.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0110.tw		database-sms.js | TODO:copy logic
++twsplit_Sext_Session_0111.tw		database-sms.js | TODO:copy logic
+twsplit_Stella_Chat.tw
++twsplit_Stella_Conference.tw		story-stella.tw
++twsplit_Stella_SMS.tw				database-sms.js
++twsplit_StoryCaption.tw			index.tw
+twsplit_StoryInit.tw
+twsplit_StorySettings.tw
++twsplit_StoryTitle.tw
+-twsplit_Story_JavaScript_[script].tw
+twsplit_Story_Stylesheet_[stylesheet].tw
+twsplit_Talk_Dirty.tw				macro-visme-session.js
+-twsplit_Test_Stuff.tw
+-twsplit_VisBox.tw
++twsplit_VisMe.tw					macro-visme-session.js
+twsplit_Widgets_[widget].tw			database-npcs.js (+FEEBACK) & macro-achievement.js
+twsplit_Work.tw						scenes.tw & scenes-helper.tw
+twsplit_arrayAchievements.tw
++twsplit_arrayDowntown.tw			database-downtown.js
++ twsplit_arrayGirl.tw				database-sms.js database-hypno.js
++twsplit_arrayJenny.tw				database-sms.js database-encounter.js
++twsplit_arrayStella.tw				database-sms.js database-encounter.js
